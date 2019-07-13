@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.abqtrailsserverside.model.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.net.URI;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,7 +13,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
@@ -29,15 +33,15 @@ public class Trail {
   @GeneratedValue(generator = "uuid2")
   @GenericGenerator(name = "uuid2", strategy = "uuid2")
   @Column(name = "trail_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false,
-  updatable = false)
+      updatable = false)
   private UUID id;
 
   @NonNull
-  @Column(nullable = false, unique = true)
+  @Column(name = "trail_name", nullable = false, unique = true)
   private String name;
 
   @NonNull
-  @Column (nullable = false)
+  @Column(nullable = false)
   private double length;
 
   @Column
@@ -56,12 +60,15 @@ public class Trail {
   @Column(name = "trail_rating")
   private double rating;
 
-  @OneToMany(fetch = FetchType.LAZY,
-      cascade = {CascadeType.ALL.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-  @JoinTable //TODO Finish this
-  //TODO Set as Flat?
-  private List<Trail> trails = new LinkedList<>();
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "photo",
+      cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+  @OrderBy("photo_id ASC ")
+  private List<Photo> photos = new LinkedList<>();
 
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "rating",
+      cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+  @OrderBy("rating_id ASC")
+  private List<Rating> ratings = new LinkedList<>();
 
   public UUID getId() {
     return id;
@@ -123,11 +130,15 @@ public class Trail {
     this.rating = rating;
   }
 
-  public List<Trail> getTrails() {
-    return trails;
+  public List<Photo> getPhotos() {
+    return photos;
   }
 
-//  @Override TODO turn this on when if we create flat and implement. Otherwise, delete.
+  public List<Rating> getRatings() {
+    return ratings;
+  }
+
+  //  @Override TODO turn this on when if we create flat and implement. Otherwise, delete.
   public URI getHref() {
     return entityLinks.linkForSingleResource(Trail.class, id).toUri();
   }
@@ -138,7 +149,7 @@ public class Trail {
   }
 
   @Autowired
-  private void  setEntityLinks(EntityLinks entityLinks) {
+  private void setEntityLinks(EntityLinks entityLinks) {
     Trail.entityLinks = entityLinks;
   }
 
