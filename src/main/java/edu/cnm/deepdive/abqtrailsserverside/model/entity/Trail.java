@@ -137,8 +137,7 @@ public class Trail {
   public List<Rating> getRatings() {
     return ratings;
   }
-
-  //  @Override TODO turn this on when if we create flat and implement. Otherwise, delete.
+  
   public URI getHref() {
     return entityLinks.linkForSingleResource(Trail.class, id).toUri();
   }
