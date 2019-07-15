@@ -1,6 +1,8 @@
 package edu.cnm.deepdive.abqtrailsserverside.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.net.URI;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -13,7 +15,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
@@ -30,6 +36,21 @@ public class User {
   private UUID id;
 
   @NonNull
+  @CreationTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(nullable = false, updatable = false)
+  private Date created;
+
+  @NonNull
+  @UpdateTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(nullable = false)
+  private Date updated;
+
+  @Column(nullable = false, unique = true)
+  private String username;
+
+  @NonNull
   @Column(name = "first_name", nullable = false)
   private String firstName;
 
@@ -37,18 +58,26 @@ public class User {
   @Column(name = "last_name", nullable = false)
   private String lastName;
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "photo",
+  @JsonIgnore
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-  @OrderBy("photo_id ASC ")
   private List<Photo> photos = new LinkedList<>();
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "rating",
+  @JsonIgnore
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-  @OrderBy("rating_id ASC")
   private List<Rating> ratings = new LinkedList<>();
 
   public UUID getId() {
     return id;
+  }
+
+  public Date getCreated() {
+    return created;
+  }
+
+  public Date getUpdated() {
+    return updated;
   }
 
   public List<Photo> getPhotos() {
@@ -57,6 +86,14 @@ public class User {
 
   public List<Rating> getRatings() {
     return ratings;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public String getFirstName() {
@@ -75,7 +112,6 @@ public class User {
     this.lastName = lastName;
   }
 
-  //  @Override TODO turn this on when if we create flat and implement. Otherwise, delete.
   public URI getHref() {
     return entityLinks.linkForSingleResource(User.class, id).toUri();
   }
