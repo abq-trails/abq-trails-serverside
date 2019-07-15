@@ -2,6 +2,7 @@ package edu.cnm.deepdive.abqtrailsserverside.model.entity;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.net.URI;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -17,7 +18,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
@@ -35,6 +40,18 @@ public class Trail {
   @Column(name = "trail_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false,
       updatable = false)
   private UUID id;
+
+  @NonNull
+  @CreationTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(nullable = false, updatable = false)
+  private Date created;
+
+  @NonNull
+  @UpdateTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(nullable = false)
+  private Date updated;
 
   @NonNull
   @Column(name = "trail_name", nullable = false, unique = true)
@@ -137,7 +154,15 @@ public class Trail {
   public List<Rating> getRatings() {
     return ratings;
   }
-  
+
+  public Date getCreated() {
+    return created;
+  }
+
+  public Date getUpdated() {
+    return updated;
+  }
+
   public URI getHref() {
     return entityLinks.linkForSingleResource(Trail.class, id).toUri();
   }
