@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.abqtrailsserverside.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.net.URI;
 import java.util.Date;
@@ -77,18 +78,35 @@ public class Trail {
   @Column(name = "trail_rating")
   private double rating;
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "photo",
+  @JsonIgnore
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "trail",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-  @OrderBy("photo_id ASC ")
+  private List<Rating> ratings = new LinkedList<>();
+
+  @JsonIgnore
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "trail",
+      cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
   private List<Photo> photos = new LinkedList<>();
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "rating",
-      cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-  @OrderBy("rating_id ASC")
-  private List<Rating> ratings = new LinkedList<>();
 
   public UUID getId() {
     return id;
+  }
+
+  public Date getCreated() {
+    return created;
+  }
+
+  public Date getUpdated() {
+    return updated;
+  }
+
+  public List<Photo> getPhotos() {
+    return photos;
+  }
+
+  public List<Rating> getRatings() {
+    return ratings;
   }
 
   public String getName() {
@@ -145,22 +163,6 @@ public class Trail {
 
   public void setRating(double rating) {
     this.rating = rating;
-  }
-
-  public List<Photo> getPhotos() {
-    return photos;
-  }
-
-  public List<Rating> getRatings() {
-    return ratings;
-  }
-
-  public Date getCreated() {
-    return created;
-  }
-
-  public Date getUpdated() {
-    return updated;
   }
 
   public URI getHref() {

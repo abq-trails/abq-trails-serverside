@@ -1,8 +1,10 @@
 package edu.cnm.deepdive.abqtrailsserverside.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.net.URI;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -18,9 +20,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
+import org.springframework.lang.NonNull;
 
 public class Photo {
 
@@ -33,30 +40,50 @@ public class Photo {
       updatable = false)
   private UUID id;
 
-  @OneToMany(fetch = FetchType.LAZY,
-  cascade = {CascadeType.ALL.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-  @JoinTable(joinColumns = @JoinColumn(name = "photo_id"),
-  inverseJoinColumns = @JoinColumn(name = "trail_id"))
-  @OrderBy("trail_name asc")
-  private List<Trail> trails = new LinkedList<>();
+  @NonNull
+  @CreationTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(nullable = false, updatable = false)
+  private Date created;
 
-  @ManyToOne(fetch = FetchType.LAZY,
-      cascade = {CascadeType.ALL.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-  @JoinTable(joinColumns = @JoinColumn(name = "photo_id"),
-      inverseJoinColumns = @JoinColumn(name = "user_id"))
-  @OrderBy("user_name asc")
-  private List<User> users = new LinkedList<>();
+  @NonNull
+  @UpdateTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(nullable = false)
+  private Date updated;
+
+  @JsonIgnore
+  @NonNull
+  @Column(nullable = false)
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "trail_id")
+  private Trail trail;
+
+  @JsonIgnore
+  @NonNull
+  @Column(nullable = false)
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "user_id")
+  private User user;
 
   public UUID getId() {
     return id;
   }
 
-  public List<Trail> getTrails() {
-    return trails;
+  public Date getCreated() {
+    return created;
   }
 
-  public List<User> getUsers() {
-    return users;
+  public Date getUpdated() {
+    return updated;
+  }
+
+  public Trail getTrail() {
+    return trail;
+  }
+
+  public void setTrail(Trail trail) {
+    this.trail = trail;
   }
 
   public URI getHref() {
