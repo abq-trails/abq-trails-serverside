@@ -13,4 +13,5 @@ public interface PhotoRepository extends CrudRepository<Photo, UUID> {
   List<Photo> getAllByTrailOrderByCreatedDesc (Trail trail);
 
   List<Photo> getAllByUserOrderByCreatedDesc (User user);
+
 }
