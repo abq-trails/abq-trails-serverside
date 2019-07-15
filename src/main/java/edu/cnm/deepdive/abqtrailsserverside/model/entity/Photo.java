@@ -29,7 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
 
-public class Photo {
+public class Photo  {
 
   private static EntityLinks entityLinks;
 
