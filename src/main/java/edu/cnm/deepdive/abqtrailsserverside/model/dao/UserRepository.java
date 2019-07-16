@@ -7,15 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, UUID> {
 
-  List<User> getAllByUserOrderByUsername (User user);
-
-  List<User> getAllById (User user);
-
+  List<User> getAllByOrderByUsername ();
 
 }
 
-
-//List<> getAllByUserOrderByCreatedDesc (User user);
-//List<> getAllById (Rating rating);
-//List<Rating> getAllByUserOrderByCreatedDesc (User user);
-//List<> getAllById ();
