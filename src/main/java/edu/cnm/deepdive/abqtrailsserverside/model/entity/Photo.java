@@ -31,6 +31,9 @@ import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
+@Entity
+@Component
+public class Photo {
 
   private static EntityLinks entityLinks;
 
