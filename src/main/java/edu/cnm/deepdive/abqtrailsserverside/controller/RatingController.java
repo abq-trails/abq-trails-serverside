@@ -35,6 +35,7 @@ public class RatingController {
     this.repository = repository;
   }
 
+
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Rating> list() {
     return repository.getAllByOrderByCreatedDesc();
