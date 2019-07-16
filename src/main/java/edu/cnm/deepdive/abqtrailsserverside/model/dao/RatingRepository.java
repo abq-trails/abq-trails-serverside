@@ -13,4 +13,6 @@ public interface RatingRepository extends CrudRepository<Rating, UUID> {
 
   List<Rating> getAllByUserOrderByCreatedDesc (User user);
 
+  List<Rating> getAllByOrderByCreatedDesc ();
+
 }

@@ -33,6 +33,11 @@ public class PhotoController {
     this.repository = repository;
   }
 
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Photo> list() {
+    return repository.getAllByOrderByCreatedDesc();
+  }
+
   @GetMapping(value = "search", params = "user", produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Photo> search(@RequestParam(value = "user", required = true) Trail trailName) {
     return repository.getAllByTrailOrderByCreatedDesc(trailName);

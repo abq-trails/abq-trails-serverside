@@ -34,6 +34,11 @@ public class RatingController {
     this.repository = repository;
   }
 
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Rating> list() {
+    return repository.getAllByOrderByCreatedDesc();
+  }
+
   @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public Rating get(@PathVariable("id") UUID id) {
     return repository.findById(id).get();
