@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Tue Jul 16 14:03:58 MDT 2019:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-016b-fc62-6f78-000005fd5068 
+Tue Jul 16 12:47:07 MDT 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-016b-fc1c-14fe-000005e35b60 
 on database directory C:\Users\Mike PC\Desktop\bootcamp\projects\abq-trails-serverside\trails_db with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
 Loaded from file:/C:/Users/Mike%20PC/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
