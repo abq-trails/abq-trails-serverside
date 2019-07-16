@@ -15,8 +15,6 @@ public interface PhotoRepository extends CrudRepository<Photo, UUID> {
 
   List<Photo> getAllByOrderByCreatedDesc ();
 
-  List<Photo> getAllByOrderByCreatedDesc( );
-
   List<Photo> getAllById (UUID id);
 
 }
