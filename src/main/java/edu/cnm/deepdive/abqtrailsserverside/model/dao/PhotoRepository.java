@@ -5,7 +5,6 @@ import edu.cnm.deepdive.abqtrailsserverside.model.entity.Trail;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.User;
 import java.util.List;
 import java.util.UUID;
-import javax.print.DocFlavor.STRING;
 import org.springframework.data.repository.CrudRepository;
 
 public interface PhotoRepository extends CrudRepository<Photo, UUID> {
