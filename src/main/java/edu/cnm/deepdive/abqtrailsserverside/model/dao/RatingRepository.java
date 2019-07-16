@@ -1,18 +1,16 @@
 package edu.cnm.deepdive.abqtrailsserverside.model.dao;
 
-import edu.cnm.deepdive.abqtrailsserverside.model.entity.Photo;
+import edu.cnm.deepdive.abqtrailsserverside.model.entity.Rating;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.Trail;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.User;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.data.repository.CrudRepository;
 
-public interface PhotoRepository extends CrudRepository<Photo, UUID> {
+public interface RatingRepository extends CrudRepository<Rating, UUID> {
 
-  List<Photo> getAllByTrailOrderByCreatedDesc (Trail trail);
+  List<Rating> getAllByTrailOrderByCreatedDesc (Trail trail);
 
-  List<Photo> getAllByUserOrderByCreatedDesc (User user);
-
-  List<Photo> getAllById (UUID id);
+  List<Rating> getAllByUserOrderByCreatedDesc (User user);
 
 }
