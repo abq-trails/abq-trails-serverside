@@ -33,13 +33,13 @@ public class PhotoController {
     this.repository = repository;
   }
 
-  @GetMapping(value = "search", produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<Photo> search(@RequestParam(value = "q", required = true) Trail trailName) {
+  @GetMapping(value = "search", params = "user", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Photo> search(@RequestParam(value = "user", required = true) Trail trailName) {
     return repository.getAllByTrailOrderByCreatedDesc(trailName);
   }
 
-  @GetMapping(value = "search", produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<Photo> search(@RequestParam(value = "q", required = true) User userName) {
+  @GetMapping(value = "search", params = "trail", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Photo> search(@RequestParam(value = "trail", required = true) User userName) {
     return repository.getAllByUserOrderByCreatedDesc(userName);
   }
 

@@ -33,13 +33,13 @@ public class RatingController {
     return repository.findById(id).get();
   }
 
-  @GetMapping(value = "search", produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<Rating> search(@RequestParam(value = "q", required = true) User user) {
+  @GetMapping(value = "search", params = "user",produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Rating> search(@RequestParam(value = "user", required = true) User user) {
     return repository.getAllByUserOrderByCreatedDesc(user);
   }
 
-  @GetMapping(value = "search", produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<Rating> search(@RequestParam(value = "q", required = true) Trail trail) {
+  @GetMapping(value = "search", params = "trail", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Rating> search(@RequestParam(value = "trail", required = true) Trail trail) {
     return repository.getAllByTrailOrderByCreatedDesc(trail);
   }
 

@@ -27,7 +27,7 @@ import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
-@Entity
+@Entity(name = "user_profile")
 @Component
 public class User {
 
@@ -66,12 +66,10 @@ public class User {
   @Column(name = "last_name", nullable = false)
   private String lastName;
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",
-      cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
   private List<Photo> photos = new LinkedList<>();
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",
-      cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
   private List<Rating> ratings = new LinkedList<>();
 
   public UUID getId() {
