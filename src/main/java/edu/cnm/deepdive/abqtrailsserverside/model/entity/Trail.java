@@ -78,16 +78,14 @@ public class Trail {
   @Column(name = "trail_rating")
   private double rating;
 
-  @JsonIgnore
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "trail",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
   private List<Rating> ratings = new LinkedList<>();
 
-  @JsonIgnore
+
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "trail",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
   private List<Photo> photos = new LinkedList<>();
-
 
   public UUID getId() {
     return id;

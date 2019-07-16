@@ -1,8 +1,7 @@
-package edu.cnm.deepdive.abqtrailsserverside.Controller;
+package edu.cnm.deepdive.abqtrailsserverside.controller;
 
 import edu.cnm.deepdive.abqtrailsserverside.model.dao.PhotoRepository;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.Photo;
-import edu.cnm.deepdive.abqtrailsserverside.model.entity.Rating;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.Trail;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.User;
 import java.util.List;
@@ -50,7 +49,8 @@ public class PhotoController {
   }
 
   @PostMapping(
-      consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Photo> post(@RequestBody Photo photo) {
     repository.save(photo);
     return ResponseEntity.created(photo.getHref()).body(photo);

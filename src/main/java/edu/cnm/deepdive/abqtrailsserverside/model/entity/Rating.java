@@ -31,8 +31,6 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Component
-@JsonIgnoreProperties(value = {"created", "updated", "href"}, allowGetters = true,
-    ignoreUnknown = true)
 public class Rating {
 
   private static EntityLinks entityLinks;
@@ -56,16 +54,10 @@ public class Rating {
   @Column(nullable = false)
   private Date updated;
 
-  @JsonIgnore
-  @NonNull
-  @Column(nullable = false)
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "trail_id")
   private Trail trail;
 
-  @JsonIgnore
-  @NonNull
-  @Column(nullable = false)
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "user_id")
   private User user;

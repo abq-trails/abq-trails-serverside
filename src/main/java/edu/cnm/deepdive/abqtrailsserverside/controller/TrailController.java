@@ -1,7 +1,7 @@
-package edu.cnm.deepdive.abqtrailsserverside.Controller;
+package edu.cnm.deepdive.abqtrailsserverside.controller;
 
+import edu.cnm.deepdive.abqtrailsserverside.model.dao.TrailRepository;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.Trail;
-import edu.cnm.deepdive.abqtrailsserverside.model.entity.User;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -25,25 +25,17 @@ public class TrailController {
     return repository.findById(id).get();
   }
 
-  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<Trail> list() {
-    return repository.getAllByOrderByName();
+  @GetMapping(value = "{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Trail get(@PathVariable("name") String name) {
+    return repository.findByName(name);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Trail> list() {
-    return repository.getAllByLengthOrderByName();
+    return repository.getAllByOrderByNameAsc();
   }
 
-  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<Trail> list() {
-    return repository.getAllByBikeOrderByName();
-  }
-
-  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<Trail> list() {
-    return repository.getAllByHorseOrderByName();
-  }
+  //TODO Add a put to adjust rating ONLY.
 
   @ResponseStatus(value = HttpStatus.NOT_FOUND)
   @ExceptionHandler(NoSuchElementException.class)

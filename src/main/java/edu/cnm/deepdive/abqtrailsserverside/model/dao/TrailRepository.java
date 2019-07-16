@@ -7,12 +7,9 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface TrailRepository extends CrudRepository<Trail, UUID> {
 
-  List<Trail> getAllByNameOrderAsc (Trail trail);
-  List<Trail> getAllByLengthOrderByNameAsc (Trail trail);
-  List<Trail> getAllByHorseOrderByNameAsc (Trail trail);
-  List<Trail> getAllByBikeOrderByNameAsc (Trail trail);
-  List<Trail> getAllByDogOrderByNameAsc (Trail trail);
-  List<Trail> getAllById (Trail trail);
+  List<Trail> getAllByOrderByNameAsc ();
+  List<Trail> getAllByOrderByLengthAsc ();
+  Trail findByName(String name);
 
 
 

@@ -1,9 +1,6 @@
-package edu.cnm.deepdive.abqtrailsserverside.Controller;
+package edu.cnm.deepdive.abqtrailsserverside.controller;
 
-import edu.cnm.deepdive.abqtrailsserverside.model.dao.PhotoRepository;
 import edu.cnm.deepdive.abqtrailsserverside.model.dao.UserRepository;
-import edu.cnm.deepdive.abqtrailsserverside.model.entity.Photo;
-import edu.cnm.deepdive.abqtrailsserverside.model.entity.Rating;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.User;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -23,16 +20,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class UserController {
 
   private final UserRepository repository;
-  private final PhotoRepository photoRepository;
-  private final RatingRepository ratingRepository;
   
 
-  public UserController(UserRepository repository,
-      PhotoRepository photoRepository,
-      RatingRepository ratingRespository) {
+  public UserController(UserRepository repository) {
     this.repository = repository;
-    this.photoRepository = photoRepository;
-    this.ratingRepository = ratingRespository;
   }
 
   @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)

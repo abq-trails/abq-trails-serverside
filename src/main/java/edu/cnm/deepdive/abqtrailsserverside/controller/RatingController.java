@@ -1,9 +1,8 @@
-package edu.cnm.deepdive.abqtrailsserverside.Controller;
+package edu.cnm.deepdive.abqtrailsserverside.controller;
 
-import edu.cnm.deepdive.abqtrailsserverside.model.dao.PhotoRepository;
-import edu.cnm.deepdive.abqtrailsserverside.model.entity.Photo;
+import edu.cnm.deepdive.abqtrailsserverside.model.dao.RatingRepository;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.Rating;
-import edu.cnm.deepdive.abqtrailsserverside.model.entity.Rating;
+import edu.cnm.deepdive.abqtrailsserverside.model.entity.Trail;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.User;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 public class RatingController {
@@ -33,14 +33,14 @@ public class RatingController {
     return repository.findById(id).get();
   }
 
-  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<Rating> list() {
-    return repository.getAllByOrderByUsername();
+  @GetMapping(value = "search", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Rating> search(@RequestParam(value = "q", required = true) User user) {
+    return repository.getAllByUserOrderByCreatedDesc(user);
   }
 
-  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<Rating> list() {
-    return repository.getAllByOrderByTrail();
+  @GetMapping(value = "search", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Rating> search(@RequestParam(value = "q", required = true) Trail trail) {
+    return repository.getAllByTrailOrderByCreatedDesc(trail);
   }
 
   @PostMapping(
