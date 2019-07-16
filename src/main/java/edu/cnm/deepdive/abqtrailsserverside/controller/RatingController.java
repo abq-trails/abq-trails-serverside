@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.abqtrailsserverside.controller;
 
 import edu.cnm.deepdive.abqtrailsserverside.model.dao.RatingRepository;
+import edu.cnm.deepdive.abqtrailsserverside.model.entity.Photo;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.Rating;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.Trail;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.User;
@@ -32,6 +33,11 @@ public class RatingController {
   
   public RatingController(RatingRepository repository) {
     this.repository = repository;
+  }
+
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Rating> list() {
+    return repository.getAllByOrderByCreatedDesc();
   }
 
   @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
