@@ -1,8 +1,8 @@
 package edu.cnm.deepdive.abqtrailsserverside.Controller;
 
 import edu.cnm.deepdive.abqtrailsserverside.model.dao.PhotoRepository;
-import edu.cnm.deepdive.abqtrailsserverside.model.dao.UserRepository;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.Photo;
+import edu.cnm.deepdive.abqtrailsserverside.model.entity.Rating;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.Rating;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.User;
 import java.util.List;
@@ -20,48 +20,47 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-public class UserController {
+public class RatingController {
 
-  private final UserRepository repository;
-  private final PhotoRepository photoRepository;
-  private final RatingRepository ratingRepository;
+  private final RatingRepository repository;
   
-
-  public UserController(UserRepository repository,
-      PhotoRepository photoRepository,
-      RatingRepository ratingRespository) {
+  public RatingController(RatingRepository repository) {
     this.repository = repository;
-    this.photoRepository = photoRepository;
-    this.ratingRepository = ratingRespository;
   }
 
   @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public User get(@PathVariable("id") UUID id) {
+  public Rating get(@PathVariable("id") UUID id) {
     return repository.findById(id).get();
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<User> list() {
+  public List<Rating> list() {
     return repository.getAllByOrderByUsername();
+  }
+
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Rating> list() {
+    return repository.getAllByOrderByTrail();
   }
 
   @PostMapping(
       consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<User> post(@RequestBody User user) {
-    repository.save(user);
-    return ResponseEntity.created(user.getHref()).body(user);
+  public ResponseEntity<Rating> post(@RequestBody Rating rating) {
+    repository.save(rating);
+    return ResponseEntity.created(rating.getHref()).body(rating);
   }
 
   @PutMapping(value = "{id}",
       consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public User put(@PathVariable("id") UUID id, @RequestBody User user) {
-    User existingUser = repository.findById(id).get();
-    existingUser.setFirstName(user.getFirstName());
-    existingUser.setLastName(user.getLastName());
-    existingUser.setUsername(user.getUsername());
-    repository.save(existingUser);
-    //TODO Add in if statement to retrieve user etc. if necessary (see Movie Controller put).
-    return existingUser;
+  public Rating put(@PathVariable("id") UUID id, @RequestBody Rating rating) {
+    Rating existingRating = repository.findById(id).get();
+    existingRating.setReview(rating.getReview());
+    existingRating.setRating(rating.getRating());
+    existingRating.setTrail(rating.getTrail());
+    existingRating.setUser(rating.getUser());
+    repository.save(existingRating);
+   //TODO Add in if statement to retrieve user etc. if necessary (see Movie Controller put).
+    return existingRating;
   }
 
   @DeleteMapping(value = "{id}")
