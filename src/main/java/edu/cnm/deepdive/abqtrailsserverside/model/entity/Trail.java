@@ -2,6 +2,7 @@ package edu.cnm.deepdive.abqtrailsserverside.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import edu.cnm.deepdive.abqtrailsserverside.view.FlatTrail;
 import java.net.URI;
 import java.util.Date;
 import java.util.LinkedList;
@@ -31,7 +32,7 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Component
-public class Trail {
+public class Trail implements FlatTrail {
 
   private static EntityLinks entityLinks;
 
@@ -63,13 +64,13 @@ public class Trail {
   private double length;
 
   @Column
-  private String horse;
+  private boolean horse;
 
   @Column
-  private String dog;
+  private boolean dog;
 
   @Column
-  private String bike;
+  private boolean bike;
 
   @NonNull
   @Column(nullable = false, name = "trail_head")
@@ -123,27 +124,27 @@ public class Trail {
     this.length = length;
   }
 
-  public String getHorse() {
+  public boolean isHorse() {
     return horse;
   }
 
-  public void setHorse(String horse) {
+  public void setHorse(boolean horse) {
     this.horse = horse;
   }
 
-  public String getDog() {
+  public boolean isDog() {
     return dog;
   }
 
-  public void setDog(String dog) {
+  public void setDog(boolean dog) {
     this.dog = dog;
   }
 
-  public String getBike() {
+  public boolean isBike() {
     return bike;
   }
 
-  public void setBike(String bike) {
+  public void setBike(boolean bike) {
     this.bike = bike;
   }
 

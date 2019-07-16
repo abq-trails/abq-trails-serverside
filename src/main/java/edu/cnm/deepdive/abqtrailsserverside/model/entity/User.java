@@ -2,6 +2,7 @@ package edu.cnm.deepdive.abqtrailsserverside.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import edu.cnm.deepdive.abqtrailsserverside.view.FlatUser;
 import java.net.URI;
 import java.util.Date;
 import java.util.LinkedList;
@@ -29,7 +30,7 @@ import org.springframework.stereotype.Component;
 
 @Entity(name = "user_profile")
 @Component
-public class User {
+public class User implements FlatUser {
 
   private static EntityLinks entityLinks;
 
