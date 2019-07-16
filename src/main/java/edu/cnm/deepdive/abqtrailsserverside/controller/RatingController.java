@@ -54,6 +54,7 @@ public class RatingController {
     return repository.getAllByTrailOrderByCreatedDesc(trail);
   }
 
+  //TODO Build this so that it returns username rather than uuid (see Genre I think).
   @PostMapping(
       consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Rating> post(@RequestBody Rating rating) {
