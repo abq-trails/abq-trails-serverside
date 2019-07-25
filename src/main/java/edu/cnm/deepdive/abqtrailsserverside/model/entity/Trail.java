@@ -88,14 +88,17 @@ public class Trail implements FlatTrail {
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
   private List<Photo> photos = new LinkedList<>();
 
+  @Override
   public UUID getId() {
     return id;
   }
 
+  @Override
   public Date getCreated() {
     return created;
   }
 
+  @Override
   public Date getUpdated() {
     return updated;
   }
@@ -108,6 +111,7 @@ public class Trail implements FlatTrail {
     return ratings;
   }
 
+  @Override
   public String getName() {
     return name;
   }
@@ -116,6 +120,7 @@ public class Trail implements FlatTrail {
     this.name = name;
   }
 
+  @Override
   public double getLength() {
     return length;
   }
@@ -124,6 +129,7 @@ public class Trail implements FlatTrail {
     this.length = length;
   }
 
+  @Override
   public boolean isHorse() {
     return horse;
   }
@@ -132,6 +138,7 @@ public class Trail implements FlatTrail {
     this.horse = horse;
   }
 
+  @Override
   public boolean isDog() {
     return dog;
   }
@@ -140,6 +147,7 @@ public class Trail implements FlatTrail {
     this.dog = dog;
   }
 
+  @Override
   public boolean isBike() {
     return bike;
   }
@@ -148,6 +156,7 @@ public class Trail implements FlatTrail {
     this.bike = bike;
   }
 
+  @Override
   public String getTrailHead() {
     return trailHead;
   }
@@ -156,6 +165,7 @@ public class Trail implements FlatTrail {
     this.trailHead = trailHead;
   }
 
+  @Override
   public double getRating() {
     return rating;
   }
@@ -164,6 +174,7 @@ public class Trail implements FlatTrail {
     this.rating = rating;
   }
 
+  @Override
   public URI getHref() {
     return entityLinks.linkForSingleResource(Trail.class, id).toUri();
   }

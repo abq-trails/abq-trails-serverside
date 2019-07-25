@@ -73,14 +73,18 @@ public class User implements FlatUser {
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
   private List<Rating> ratings = new LinkedList<>();
 
+
+  @Override
   public UUID getId() {
     return id;
   }
 
+  @Override
   public Date getCreated() {
     return created;
   }
 
+  @Override
   public Date getUpdated() {
     return updated;
   }
@@ -93,6 +97,7 @@ public class User implements FlatUser {
     return ratings;
   }
 
+  @Override
   public String getUsername() {
     return username;
   }
@@ -101,6 +106,7 @@ public class User implements FlatUser {
     this.username = username;
   }
 
+  @Override
   public String getAuthenticatedId() {
     return authenticatedId;
   }
@@ -109,6 +115,7 @@ public class User implements FlatUser {
     this.authenticatedId = authenticatedId;
   }
 
+  @Override
   public String getFirstName() {
     return firstName;
   }
@@ -117,6 +124,7 @@ public class User implements FlatUser {
     this.firstName = firstName;
   }
 
+  @Override
   public String getLastName() {
     return lastName;
   }
@@ -125,6 +133,7 @@ public class User implements FlatUser {
     this.lastName = lastName;
   }
 
+  @Override
   public URI getHref() {
     return entityLinks.linkForSingleResource(User.class, id).toUri();
   }
