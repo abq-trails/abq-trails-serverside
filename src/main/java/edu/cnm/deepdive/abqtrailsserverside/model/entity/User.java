@@ -2,6 +2,7 @@ package edu.cnm.deepdive.abqtrailsserverside.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import edu.cnm.deepdive.abqtrailsserverside.view.FlatUser;
 import java.net.URI;
 import java.util.Date;
 import java.util.LinkedList;
@@ -29,7 +30,7 @@ import org.springframework.stereotype.Component;
 
 @Entity(name = "user_profile")
 @Component
-public class User {
+public class User implements FlatUser {
 
   private static EntityLinks entityLinks;
 
@@ -72,14 +73,18 @@ public class User {
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
   private List<Rating> ratings = new LinkedList<>();
 
+
+  @Override
   public UUID getId() {
     return id;
   }
 
+  @Override
   public Date getCreated() {
     return created;
   }
 
+  @Override
   public Date getUpdated() {
     return updated;
   }
@@ -92,6 +97,7 @@ public class User {
     return ratings;
   }
 
+  @Override
   public String getUsername() {
     return username;
   }
@@ -100,6 +106,7 @@ public class User {
     this.username = username;
   }
 
+  @Override
   public String getAuthenticatedId() {
     return authenticatedId;
   }
@@ -108,6 +115,7 @@ public class User {
     this.authenticatedId = authenticatedId;
   }
 
+  @Override
   public String getFirstName() {
     return firstName;
   }
@@ -116,6 +124,7 @@ public class User {
     this.firstName = firstName;
   }
 
+  @Override
   public String getLastName() {
     return lastName;
   }
@@ -124,6 +133,7 @@ public class User {
     this.lastName = lastName;
   }
 
+  @Override
   public URI getHref() {
     return entityLinks.linkForSingleResource(User.class, id).toUri();
   }

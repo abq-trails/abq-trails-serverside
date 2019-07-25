@@ -3,6 +3,8 @@ package edu.cnm.deepdive.abqtrailsserverside.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import edu.cnm.deepdive.abqtrailsserverside.view.FlatTrail;
+import edu.cnm.deepdive.abqtrailsserverside.view.FlatUser;
 import java.net.URI;
 import java.util.Date;
 import java.util.LinkedList;
@@ -57,10 +59,12 @@ public class Photo {
   private Date updated;
 
   @ManyToOne(fetch = FetchType.EAGER)
+  @JsonSerialize(as = FlatTrail.class)
   @JoinColumn(name = "trail_id")
   private Trail trail;
 
   @ManyToOne(fetch = FetchType.EAGER)
+  @JsonSerialize(as = FlatUser.class)
   @JoinColumn(name = "user_id")
   private User user;
 
