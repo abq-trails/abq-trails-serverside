@@ -32,7 +32,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class User implements FlatUser {
 
-  private static EntityLinks entityLins;
+  private static EntityLinks entityLinks;
 
   @Id
   @GeneratedValue(generator = "uuid2")
