@@ -43,6 +43,13 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>de.grundid.opendatalab</groupId>
+      <artifactId>geojson-jackson</artifactId>
+      <version>1.8.1</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -50,6 +57,30 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.22.2</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <show>protected</show>
+<!--          TODO Check these.-->
+          <links><link>https://docs.oracle.com/javase/8/docs/api/</link>
+            <link>https://javaee.github.io/javaee-spec/javadocs/</link>
+            <link>https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/api/</link>
+            <link>https://docs.spring.io/spring/docs/5.1.5.RELEASE/javadoc-api/</link>
+            <link>https://docs.spring.io/spring-hateoas/docs/0.25.1.RELEASE/</link>
+            <link>https://docs.spring.io/spring-data/commons/docs/2.1.9.RELEASE/api/</link>
+            <link>https://docs.spring.io/spring-data/jpa/docs/2.1.9.RELEASE/api/</link>
+            <link>https://docs.jboss.org/hibernate/orm/5.4/javadocs/</link></links>
+        </configuration>
       </plugin>
     </plugins>
   </build>

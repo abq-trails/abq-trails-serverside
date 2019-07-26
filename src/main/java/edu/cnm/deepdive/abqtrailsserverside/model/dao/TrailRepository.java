@@ -13,6 +13,5 @@ public interface TrailRepository extends CrudRepository<Trail, UUID> {
 
 
 
-
 }
 
