@@ -10,6 +10,7 @@ public interface TrailRepository extends CrudRepository<Trail, UUID> {
   List<Trail> getAllByOrderByNameAsc ();
   List<Trail> getAllByOrderByLengthAsc ();
   Trail findByName(String name);
+  Trail findByCabqId(Long id);
 
 
 

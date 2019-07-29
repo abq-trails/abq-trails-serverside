@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.abqtrailsserverside;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.cnm.deepdive.abqtrailsserverside.data.DataMapper;
 import edu.cnm.deepdive.abqtrailsserverside.data.TrailData;
 import java.io.DataInput;
 import java.io.File;
@@ -44,6 +45,7 @@ public class AbqTrailsServersideApplication extends ResourceServerConfigurerAdap
 
   @Value("${oauth.clientId}")
   private String clientId;
+
 
   public static void main(String[] args) {
     SpringApplication.run(AbqTrailsServersideApplication.class, args);

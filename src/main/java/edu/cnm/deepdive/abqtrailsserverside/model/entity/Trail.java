@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.geojson.GeoJsonObject;
 import org.geojson.Geometry;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -59,7 +60,7 @@ public class Trail implements FlatTrail {
   private String name;
 
   @Column
-  private Geometry coordinates;
+  private GeoJsonObject coordinates;
 
   @Column
   private double length;
@@ -79,7 +80,6 @@ public class Trail implements FlatTrail {
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "trail",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
   private List<Review> reviews = new LinkedList<>();
-
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "trail",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -125,12 +125,11 @@ public class Trail implements FlatTrail {
     this.name = name;
   }
 
-
-  public Geometry getCoordinates() {
+  public GeoJsonObject getCoordinates() {
     return coordinates;
   }
 
-  public void setCoordinates(Geometry coordinates) {
+  public void setCoordinates(GeoJsonObject coordinates) {
     this.coordinates = coordinates;
   }
 
