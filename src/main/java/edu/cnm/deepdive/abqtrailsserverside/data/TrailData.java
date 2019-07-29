@@ -2,10 +2,11 @@ package edu.cnm.deepdive.abqtrailsserverside.data;
 
 import java.util.List;
 import java.util.Map;
+import org.geojson.FeatureCollection;
 
 public class TrailData {
 
-  public List<Feature> features;
+  public FeatureCollection features;
   public String type;
 
   public static class Feature {

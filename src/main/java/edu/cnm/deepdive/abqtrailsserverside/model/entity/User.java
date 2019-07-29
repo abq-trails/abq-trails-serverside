@@ -1,7 +1,5 @@
 package edu.cnm.deepdive.abqtrailsserverside.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import edu.cnm.deepdive.abqtrailsserverside.view.FlatUser;
 import java.net.URI;
 import java.util.Date;
@@ -9,15 +7,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 import javax.annotation.PostConstruct;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
@@ -71,7 +66,7 @@ public class User implements FlatUser {
   private List<Photo> photos = new LinkedList<>();
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-  private List<Rating> ratings = new LinkedList<>();
+  private List<Review> reviews = new LinkedList<>();
 
 
   @Override
@@ -93,8 +88,8 @@ public class User implements FlatUser {
     return photos;
   }
 
-  public List<Rating> getRatings() {
-    return ratings;
+  public List<Review> getReviews() {
+    return reviews;
   }
 
   @Override
