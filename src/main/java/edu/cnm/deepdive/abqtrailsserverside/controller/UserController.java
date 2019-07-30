@@ -49,18 +49,6 @@ public class UserController {
     return ResponseEntity.created(user.getHref()).body(user);
   }
 
-  @PutMapping(value = "{id}",
-      consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public User put(@PathVariable("id") UUID id, @RequestBody User user) {
-    User existingUser = repository.findById(id).get();
-    existingUser.setFirstName(user.getFirstName());
-    existingUser.setLastName(user.getLastName());
-    existingUser.setUsername(user.getUsername());
-    repository.save(existingUser);
-    //TODO Add in if statement to retrieve user etc. if necessary (see Movie Controller put).
-    return existingUser;
-  }
-
   @DeleteMapping(value = "{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void delete(@PathVariable("id") UUID id) {

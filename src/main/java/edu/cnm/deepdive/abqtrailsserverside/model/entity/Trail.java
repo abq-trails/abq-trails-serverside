@@ -1,13 +1,12 @@
 package edu.cnm.deepdive.abqtrailsserverside.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.cnm.deepdive.abqtrailsserverside.view.FlatTrail;
 import java.net.URI;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
+import javax.annotation.Nullable;
 import javax.annotation.PostConstruct;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,13 +14,11 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.geojson.GeoJsonObject;
+import org.geojson.Geometry;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -30,7 +27,7 @@ import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
-@Entity
+@Entity(name = "trail_table")
 @Component
 public class Trail implements FlatTrail {
 
@@ -56,33 +53,31 @@ public class Trail implements FlatTrail {
   private Date updated;
 
   @NonNull
-  @Column(name = "trail_name", nullable = false, unique = true)
-  private String name;
+  @Column(name = "cabq_id", nullable = false)
+  private Long cabqId;
 
   @NonNull
-  @Column(nullable = false)
+  @Column(name = "trail_name", nullable = false)
+  private String name;
+
+//  @Column
+//  private GeoJsonObject coordinates;
+
+  @Column
   private double length;
 
   @Column
   private boolean horse;
 
   @Column
-  private boolean dog;
-
-  @Column
   private boolean bike;
-
-  @NonNull
-  @Column(nullable = false, name = "trail_head")
-  private String trailHead;
 
   @Column(name = "trail_rating")
   private double rating;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "trail",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-  private List<Rating> ratings = new LinkedList<>();
-
+  private List<Review> reviews = new LinkedList<>();
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "trail",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -107,8 +102,22 @@ public class Trail implements FlatTrail {
     return photos;
   }
 
-  public List<Rating> getRatings() {
-    return ratings;
+  public List<Review> getReviews() {
+    return reviews;
+  }
+
+  @NonNull
+  public Long getCabqId() {
+    return cabqId;
+  }
+
+  @Override
+  public GeoJsonObject getCoordinates() {
+    return null;
+  }
+
+  public void setCabqId(@NonNull Long cabqId) {
+    this.cabqId = cabqId;
   }
 
   @Override
@@ -119,6 +128,14 @@ public class Trail implements FlatTrail {
   public void setName(String name) {
     this.name = name;
   }
+
+//  public GeoJsonObject getCoordinates() {
+//    return coordinates;
+//  }
+//
+//  public void setCoordinates(GeoJsonObject coordinates) {
+//    this.coordinates = coordinates;
+//  }
 
   @Override
   public double getLength() {
@@ -139,30 +156,12 @@ public class Trail implements FlatTrail {
   }
 
   @Override
-  public boolean isDog() {
-    return dog;
-  }
-
-  public void setDog(boolean dog) {
-    this.dog = dog;
-  }
-
-  @Override
   public boolean isBike() {
     return bike;
   }
 
   public void setBike(boolean bike) {
     this.bike = bike;
-  }
-
-  @Override
-  public String getTrailHead() {
-    return trailHead;
-  }
-
-  public void setTrailHead(String trailHead) {
-    this.trailHead = trailHead;
   }
 
   @Override
