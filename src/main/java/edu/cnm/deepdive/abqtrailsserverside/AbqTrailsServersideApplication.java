@@ -41,7 +41,7 @@ import org.springframework.web.client.RestTemplate;
 @EnableResourceServer
 public class AbqTrailsServersideApplication extends ResourceServerConfigurerAdapter {
 
-  static ResponseEntity<byte[]> result;
+//  static ResponseEntity<byte[]> result;
 
   @Value("${oauth.clientId}")
   private String clientId;

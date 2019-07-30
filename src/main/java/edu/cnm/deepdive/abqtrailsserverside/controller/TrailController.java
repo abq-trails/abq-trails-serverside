@@ -5,13 +5,18 @@ import edu.cnm.deepdive.abqtrailsserverside.model.entity.Trail;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,22 +31,28 @@ public class TrailController {
     this.repository = repository;
   }
 
-  @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Trail get(@PathVariable("id") UUID id) {
+  @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+  public Trail getTrail(@PathVariable UUID id) {
     return repository.findById(id).get();
   }
 
-  @GetMapping(value = "{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Trail get(@PathVariable("name") String name) {
-    return repository.findByName(name);
+  @GetMapping(value = "search", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Trail> search(@RequestParam("q") String fragment) {
+    return repository.findAllByNameContainingOrderByCabqId(fragment);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Trail> list() {
-    return repository.getAllByOrderByNameAsc();
+    return repository.getAllByOrderByCabqId();
   }
 
-  //TODO Add a put to adjust rating ONLY.
+  @PutMapping(value = "{cabqId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  public Trail put(@PathVariable("cabqId") Long cabqId, @RequestBody Trail update) {
+    Trail trail = repository.findByCabqId(cabqId);
+    trail.setRating(update.getRating());
+    return repository.save(trail);
+
+  }
 
   @ResponseStatus(value = HttpStatus.NOT_FOUND)
   @ExceptionHandler(NoSuchElementException.class)

@@ -44,31 +44,31 @@ public class DataMapper {
 
   public static void mapTrail(FeatureCollection collection, TrailRepository repository) {
 
-    List<Trail> trails = new LinkedList<>();
+//    List<Trail> trails = new LinkedList<>();
 
   for (Feature feature: collection.getFeatures()) {
     feature.getId();
     GeoJsonObject geometry = feature.getGeometry();
     Map properties = feature.getProperties();
-    Long cabqId = convertToLong(properties.get("id"));
+    long cabqId = convertToLong(properties.get("id"));
     if (repository.findByCabqId(cabqId) == null) {
       Trail trail = new Trail();
       trail.setCabqId(cabqId);
-      trail.setName(properties.get("name").toString());
-      if (geometry != null) {
-        trail.setCoordinates(geometry);
+      if (properties.get("name") != null) {
+        trail.setName(properties.get("name").toString());
       }
+//      if (geometry != null) {
+//        trail.setCoordinates(geometry);
+//      }
       if (properties.get("bicycle") != null) {
         trail.setBike(convertToBool(properties.get("bicycle")));
       }
       if (properties.get("horse") != null) {
         trail.setHorse(convertToBool(properties.get("horse")));
       }
-      trails.add(trail);
+      repository.save(trail);
     }
-
   }
-  repository.saveAll(trails);
   }
 
   public static Long convertToLong(Object o) {

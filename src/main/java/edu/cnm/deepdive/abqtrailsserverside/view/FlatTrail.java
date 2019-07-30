@@ -3,6 +3,7 @@ package edu.cnm.deepdive.abqtrailsserverside.view;
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
+import org.geojson.GeoJsonObject;
 
 public interface FlatTrail {
 
@@ -14,15 +15,15 @@ public interface FlatTrail {
 
   String getName();
 
+  Long getCabqId();
+
+  GeoJsonObject getCoordinates();
+
   double getLength();
 
   boolean isHorse();
 
-  boolean isDog();
-
   boolean isBike();
-
-  String getTrailHead();
 
   double getRating();
 

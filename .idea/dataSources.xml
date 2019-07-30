@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="trails_db" uuid="494757b3-1427-46f0-9e43-5510361b654e">
+    <data-source source="LOCAL" name="trails_db" uuid="be92f1a6-c7ae-444f-98e2-868d5b7f581a">
       <driver-ref>derby.embedded</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.apache.derby.jdbc.EmbeddedDriver</jdbc-driver>

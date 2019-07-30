@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
+import javax.annotation.Nullable;
 import javax.annotation.PostConstruct;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,7 +27,7 @@ import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
-@Entity
+@Entity(name = "trail_table")
 @Component
 public class Trail implements FlatTrail {
 
@@ -52,24 +53,21 @@ public class Trail implements FlatTrail {
   private Date updated;
 
   @NonNull
-  @Column(name = "cabq_id", nullable = false, unique = true)
-  private long cabqId;
+  @Column(name = "cabq_id", nullable = false)
+  private Long cabqId;
 
   @NonNull
-  @Column(name = "trail_name", nullable = false, unique = true)
+  @Column(name = "trail_name", nullable = false)
   private String name;
 
-  @Column
-  private GeoJsonObject coordinates;
+//  @Column
+//  private GeoJsonObject coordinates;
 
   @Column
   private double length;
 
   @Column
   private boolean horse;
-
-  @Column
-  private boolean dog;
 
   @Column
   private boolean bike;
@@ -108,11 +106,17 @@ public class Trail implements FlatTrail {
     return reviews;
   }
 
-  public long getCabqId() {
+  @NonNull
+  public Long getCabqId() {
     return cabqId;
   }
 
-  public void setCabqId(long cabqId) {
+  @Override
+  public GeoJsonObject getCoordinates() {
+    return null;
+  }
+
+  public void setCabqId(@NonNull Long cabqId) {
     this.cabqId = cabqId;
   }
 
@@ -125,13 +129,13 @@ public class Trail implements FlatTrail {
     this.name = name;
   }
 
-  public GeoJsonObject getCoordinates() {
-    return coordinates;
-  }
-
-  public void setCoordinates(GeoJsonObject coordinates) {
-    this.coordinates = coordinates;
-  }
+//  public GeoJsonObject getCoordinates() {
+//    return coordinates;
+//  }
+//
+//  public void setCoordinates(GeoJsonObject coordinates) {
+//    this.coordinates = coordinates;
+//  }
 
   @Override
   public double getLength() {
@@ -152,22 +156,8 @@ public class Trail implements FlatTrail {
   }
 
   @Override
-  public boolean isDog() {
-    return dog;
-  }
-
-  public void setDog(boolean dog) {
-    this.dog = dog;
-  }
-
-  @Override
   public boolean isBike() {
     return bike;
-  }
-
-  @Override
-  public String getTrailHead() {
-    return null;
   }
 
   public void setBike(boolean bike) {

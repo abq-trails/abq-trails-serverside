@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.cnm.deepdive.abqtrailsserverside.view.FlatTrail;
 import edu.cnm.deepdive.abqtrailsserverside.view.FlatUser;
 import java.net.URI;
+import java.net.URL;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -60,13 +61,17 @@ public class Photo {
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JsonSerialize(as = FlatTrail.class)
-  @JoinColumn(name = "trail_id")
+  @JoinColumn(name = "cabq_id")
   private Trail trail;
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JsonSerialize(as = FlatUser.class)
   @JoinColumn(name = "user_id")
   private User user;
+
+  @Column(name = "photo_link")
+  private URL photoLink;
+
 
   public UUID getId() {
     return id;
@@ -84,6 +89,10 @@ public class Photo {
     return trail;
   }
 
+  public void setTrail(Trail trail) {
+    this.trail = trail;
+  }
+
   public User getUser() {
     return user;
   }
@@ -92,8 +101,12 @@ public class Photo {
     this.user = user;
   }
 
-  public void setTrail(Trail trail) {
-    this.trail = trail;
+  public URL getPhotoLink() {
+    return photoLink;
+  }
+
+  public void setPhotoLink(URL photoLink) {
+    this.photoLink = photoLink;
   }
 
   public URI getHref() {
