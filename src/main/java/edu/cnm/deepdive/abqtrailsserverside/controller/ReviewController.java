@@ -1,6 +1,6 @@
 package edu.cnm.deepdive.abqtrailsserverside.controller;
 
-import edu.cnm.deepdive.abqtrailsserverside.model.dao.RatingRepository;
+import edu.cnm.deepdive.abqtrailsserverside.model.dao.ReviewRepository;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.Review;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.Trail;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.User;
@@ -26,11 +26,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @ExposesResourceFor(Review.class)
 @RequestMapping("ratings")
-public class RatingController {
+public class ReviewController {
 
-  private final RatingRepository repository;
+  private final ReviewRepository repository;
   
-  public RatingController(RatingRepository repository) {
+  public ReviewController(ReviewRepository repository) {
     this.repository = repository;
   }
 
