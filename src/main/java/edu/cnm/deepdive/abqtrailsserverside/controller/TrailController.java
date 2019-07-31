@@ -37,8 +37,13 @@ public class TrailController {
   }
 
   @GetMapping(value = "search", produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<Trail> search(@RequestParam("q") String fragment) {
+  public List<Trail> search(@RequestParam("nameFrag") String fragment) {
     return repository.findAllByNameContainingOrderByCabqId(fragment);
+  }
+
+  @GetMapping(value = "search", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Trail get(@RequestParam("cabqId") Long cabqId) {
+    return repository.findByCabqId(cabqId);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -46,13 +51,6 @@ public class TrailController {
     return repository.getAllByOrderByCabqId();
   }
 
-  @PutMapping(value = "{cabqId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public Trail put(@PathVariable("cabqId") Long cabqId, @RequestBody Trail update) {
-    Trail trail = repository.findByCabqId(cabqId);
-    trail.setRating(update.getRating());
-    return repository.save(trail);
-
-  }
 
   @ResponseStatus(value = HttpStatus.NOT_FOUND)
   @ExceptionHandler(NoSuchElementException.class)
