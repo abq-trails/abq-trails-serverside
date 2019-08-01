@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.abqtrailsserverside.data;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cnm.deepdive.abqtrailsserverside.model.dao.TrailRepository;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.Trail;
@@ -7,14 +8,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import org.geojson.Feature;
 import org.geojson.FeatureCollection;
 import org.geojson.GeoJsonObject;
-import org.geojson.Geometry;
-import org.geojson.GeometryCollection;
 import org.springframework.http.HttpMethod;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RequestCallback;
@@ -42,7 +39,9 @@ public class DataMapper {
     return collection;
   }
 
-  public static void mapTrail(FeatureCollection collection, TrailRepository repository) {
+  public static void mapTrail(FeatureCollection collection, TrailRepository repository)
+      throws JsonProcessingException {
+    ObjectMapper mapper = new ObjectMapper();
 
 //    List<Trail> trails = new LinkedList<>();
 
@@ -57,9 +56,15 @@ public class DataMapper {
       if (properties.get("name") != null) {
         trail.setName(properties.get("name").toString());
       }
-//      if (geometry != null) {
+      if (geometry != null) {
+//        System.out.println(geometry.toString());
+        String json = mapper.writeValueAsString(geometry);
+//        Geometry geo = reader.read(json);
+        trail.setCoordinates(json);
+//        geometry.
+//        trail.setCoordinates(GeometryFactory);
 //        trail.setCoordinates(geometry);
-//      }
+      }
       if (properties.get("bicycle") != null) {
         trail.setBike(convertToBool(properties.get("bicycle")));
       }
@@ -78,5 +83,6 @@ public class DataMapper {
     String status = o.toString();
     return status.equals("yes");
   }
+
 
 }

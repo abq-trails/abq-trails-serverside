@@ -49,7 +49,7 @@ public class AbqTrailsServersideApplication extends ResourceServerConfigurerAdap
 
   public static void main(String[] args) {
     SpringApplication.run(AbqTrailsServersideApplication.class, args);
-//    getData();
+//   getData();
   }
 
 //  private static void getData() {
