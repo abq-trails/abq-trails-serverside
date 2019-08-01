@@ -43,8 +43,10 @@ public class Photo {
   @Id
   @GeneratedValue(generator = "uuid2")
   @GenericGenerator(name = "uuid2", strategy = "uuid2")
-  @Column(name = "photo_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false,
+  @Column(name = "photo_id", columnDefinition = "BINARY(16)", nullable = false,
       updatable = false)
+//  @Column(name = "photo_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false,
+//      updatable = false)
   private UUID id;
 
   @NonNull

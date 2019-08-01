@@ -10,6 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class PopulateDB implements CommandLineRunner {
 
+  //TODO Figure out why this runs everytime you run the serverside application and stop it.
+
   @Autowired
   private TrailRepository trailRepository;
 
