@@ -36,13 +36,13 @@ public class TrailController {
     return repository.findById(id).get();
   }
 
-  @GetMapping(value = "search", produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<Trail> search(@RequestParam("nameFrag") String fragment) {
+  @GetMapping(value = "search", params = "nameFrag", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Trail> search(@RequestParam(value = "nameFrag", required = true) String fragment) {
     return repository.findAllByNameContainingOrderByCabqId(fragment);
   }
 
-  @GetMapping(value = "search", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Trail get(@RequestParam("cabqId") Long cabqId) {
+  @GetMapping(value = "search", params = "cabqId", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Trail get(@RequestParam(value = "cabqId", required = true) Long cabqId) {
     return repository.findByCabqId(cabqId);
   }
 

@@ -7,7 +7,7 @@
       <jdbc-driver>org.apache.derby.jdbc.EmbeddedDriver</jdbc-driver>
       <jdbc-url>jdbc:derby:$PROJECT_DIR$/trails_db</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="@localhost" uuid="3a6cc7eb-edb4-4343-8e66-ecb36aa007d7">
+    <data-source source="LOCAL" name="@localhost" uuid="d7272e3d-a665-4afc-96a5-410c5b24fa1c">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
