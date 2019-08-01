@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
-import javax.annotation.Nullable;
 import javax.annotation.PostConstruct;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,8 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.geojson.GeoJsonObject;
-import org.geojson.Geometry;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -36,8 +33,10 @@ public class Trail implements FlatTrail {
   @Id
   @GeneratedValue(generator = "uuid2")
   @GenericGenerator(name = "uuid2", strategy = "uuid2")
-  @Column(name = "trail_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false,
+  @Column(name = "trail_id", columnDefinition = "BINARY(16)", nullable = false,
       updatable = false)
+//  @Column(name = "trail_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false,
+//      updatable = false)
   private UUID id;
 
   @NonNull
@@ -60,8 +59,8 @@ public class Trail implements FlatTrail {
   @Column(name = "trail_name", nullable = false)
   private String name;
 
-//  @Column
-//  private GeoJsonObject coordinates;
+  @Column(columnDefinition = "JSON")
+  private String coordinates;
 
   @Column
   private double length;
@@ -111,11 +110,6 @@ public class Trail implements FlatTrail {
     return cabqId;
   }
 
-  @Override
-  public GeoJsonObject getCoordinates() {
-    return null;
-  }
-
   public void setCabqId(@NonNull Long cabqId) {
     this.cabqId = cabqId;
   }
@@ -129,13 +123,13 @@ public class Trail implements FlatTrail {
     this.name = name;
   }
 
-//  public GeoJsonObject getCoordinates() {
-//    return coordinates;
-//  }
-//
-//  public void setCoordinates(GeoJsonObject coordinates) {
-//    this.coordinates = coordinates;
-//  }
+  public String getCoordinates() {
+    return coordinates;
+  }
+
+  public void setCoordinates(String coordinates) {
+    this.coordinates = coordinates;
+  }
 
   @Override
   public double getLength() {

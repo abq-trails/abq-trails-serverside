@@ -17,8 +17,6 @@ public interface FlatTrail {
 
   Long getCabqId();
 
-  GeoJsonObject getCoordinates();
-
   double getLength();
 
   boolean isHorse();

@@ -32,8 +32,10 @@ public class User implements FlatUser {
   @Id
   @GeneratedValue(generator = "uuid2")
   @GenericGenerator(name = "uuid2", strategy = "uuid2")
-  @Column(name = "user_id", columnDefinition = "CHAR(16) FOR BIT DATA",
+  @Column(name = "user_id", columnDefinition = "BINARY(16)",
       nullable = false, updatable = false)
+//  @Column(name = "user_id", columnDefinition = "CHAR(16) FOR BIT DATA",
+//      nullable = false, updatable = false)
   private UUID id;
 
   @NonNull
