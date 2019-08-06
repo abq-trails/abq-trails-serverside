@@ -1,0 +1,6 @@
+edu.cnm.deepdive.abqtrailsserverside
+edu.cnm.deepdive.abqtrailsserverside.controller
+edu.cnm.deepdive.abqtrailsserverside.data
+edu.cnm.deepdive.abqtrailsserverside.model.dao
+edu.cnm.deepdive.abqtrailsserverside.model.entity
+edu.cnm.deepdive.abqtrailsserverside.view

@@ -53,47 +53,47 @@
       <version>8.0.17</version>
     </dependency>
 
-<!--    <dependency>-->
-<!--      <groupId>ch.vorburger.mariaDB4j</groupId>-->
-<!--      <artifactId>mariaDB4j</artifactId>-->
-<!--      <version>2.4.0</version>-->
-<!--    </dependency>-->
+    <!--    <dependency>-->
+    <!--      <groupId>ch.vorburger.mariaDB4j</groupId>-->
+    <!--      <artifactId>mariaDB4j</artifactId>-->
+    <!--      <version>2.4.0</version>-->
+    <!--    </dependency>-->
 
-<!--    <dependency>-->
-<!--      <groupId>org.hibernate</groupId>-->
-<!--      <artifactId>hibernate-entitymanager</artifactId>-->
-<!--      <version>5.4.4.Final</version>-->
-<!--    </dependency>-->
+    <!--    <dependency>-->
+    <!--      <groupId>org.hibernate</groupId>-->
+    <!--      <artifactId>hibernate-entitymanager</artifactId>-->
+    <!--      <version>5.4.4.Final</version>-->
+    <!--    </dependency>-->
 
-<!--    <dependency>-->
-<!--      <groupId>org.hibernate</groupId>-->
-<!--      <artifactId>hibernate-spatial</artifactId>-->
-<!--      <version>5.4.4.Final</version>-->
-<!--    </dependency>-->
+    <!--    <dependency>-->
+    <!--      <groupId>org.hibernate</groupId>-->
+    <!--      <artifactId>hibernate-spatial</artifactId>-->
+    <!--      <version>5.4.4.Final</version>-->
+    <!--    </dependency>-->
 
-<!--    <dependency>-->
-<!--      <groupId>org.locationtech.jts</groupId>-->
-<!--      <artifactId>jts-io</artifactId>-->
-<!--      <version>1.16.1</version>-->
-<!--    </dependency>-->
+    <!--    <dependency>-->
+    <!--      <groupId>org.locationtech.jts</groupId>-->
+    <!--      <artifactId>jts-io</artifactId>-->
+    <!--      <version>1.16.1</version>-->
+    <!--    </dependency>-->
 
-<!--    <dependency>-->
-<!--      <groupId>org.locationtech.jts</groupId>-->
-<!--      <artifactId>jts</artifactId>-->
-<!--      <version>1.16.1</version>-->
-<!--    </dependency>-->
+    <!--    <dependency>-->
+    <!--      <groupId>org.locationtech.jts</groupId>-->
+    <!--      <artifactId>jts</artifactId>-->
+    <!--      <version>1.16.1</version>-->
+    <!--    </dependency>-->
 
-<!--    <dependency>-->
-<!--      <groupId>org.locationtech.jts</groupId>-->
-<!--      <artifactId>jts-modules</artifactId>-->
-<!--      <version>1.16.1</version>-->
-<!--    </dependency>-->
+    <!--    <dependency>-->
+    <!--      <groupId>org.locationtech.jts</groupId>-->
+    <!--      <artifactId>jts-modules</artifactId>-->
+    <!--      <version>1.16.1</version>-->
+    <!--    </dependency>-->
 
-<!--    <dependency>-->
-<!--      <groupId>org.locationtech.jts.io</groupId>-->
-<!--      <artifactId>jts-io-common</artifactId>-->
-<!--      <version>1.16.1</version>-->
-<!--    </dependency>-->
+    <!--    <dependency>-->
+    <!--      <groupId>org.locationtech.jts.io</groupId>-->
+    <!--      <artifactId>jts-io-common</artifactId>-->
+    <!--      <version>1.16.1</version>-->
+    <!--    </dependency>-->
 
 
     <dependency>
@@ -140,15 +140,17 @@
         <version>3.1.0</version>
         <configuration>
           <show>protected</show>
-<!--          TODO Check these.-->
-          <links><link>https://docs.oracle.com/javase/8/docs/api/</link>
+          <!--          TODO Check these.-->
+          <links>
+            <link>https://docs.oracle.com/javase/8/docs/api/</link>
             <link>https://javaee.github.io/javaee-spec/javadocs/</link>
             <link>https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/api/</link>
             <link>https://docs.spring.io/spring/docs/5.1.5.RELEASE/javadoc-api/</link>
             <link>https://docs.spring.io/spring-hateoas/docs/0.25.1.RELEASE/</link>
             <link>https://docs.spring.io/spring-data/commons/docs/2.1.9.RELEASE/api/</link>
             <link>https://docs.spring.io/spring-data/jpa/docs/2.1.9.RELEASE/api/</link>
-            <link>https://docs.jboss.org/hibernate/orm/5.4/javadocs/</link></links>
+            <link>https://docs.jboss.org/hibernate/orm/5.4/javadocs/</link>
+          </links>
         </configuration>
       </plugin>
     </plugins>
