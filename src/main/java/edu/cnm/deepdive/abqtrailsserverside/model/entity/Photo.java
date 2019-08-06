@@ -34,6 +34,9 @@ import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
+/**
+ *
+ */
 @Entity
 @Component
 public class Photo {
@@ -74,43 +77,84 @@ public class Photo {
   @Column(name = "photo_link")
   private URL photoLink;
 
+// Returns for this instance.
+// Sets  for this instance.
 
+  /**
+   * Returns  <code>id</code>for this instance.
+   */
   public UUID getId() {
     return id;
   }
 
+  /**
+   *
+   * @return
+   */
   public Date getCreated() {
     return created;
   }
 
+  /**
+   *
+   * @return
+   */
   public Date getUpdated() {
     return updated;
   }
 
+  /**
+   *
+   * @return
+   */
   public Trail getTrail() {
     return trail;
   }
 
+  /**
+   *
+   * @param trail
+   */
   public void setTrail(Trail trail) {
     this.trail = trail;
   }
 
+  /**
+   *
+   * @return
+   */
   public User getUser() {
     return user;
   }
 
+  /**
+   *
+   * @param user
+   */
   public void setUser(User user) {
     this.user = user;
   }
 
+  /**
+   *
+   * @return
+   */
   public URL getPhotoLink() {
     return photoLink;
   }
 
+  /**
+   *
+   * @param photoLink
+   */
   public void setPhotoLink(URL photoLink) {
     this.photoLink = photoLink;
   }
 
+  /**
+   *
+   * @return
+   */
   public URI getHref() {
     return entityLinks.linkForSingleResource(Photo.class, id).toUri();
   }

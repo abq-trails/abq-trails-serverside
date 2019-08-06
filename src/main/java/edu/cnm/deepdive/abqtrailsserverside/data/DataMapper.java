@@ -17,10 +17,17 @@ import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ *
+ */
 public class DataMapper {
 
   private static FeatureCollection collection = null;
 
+  /**
+   *
+   * @return
+   */
   public static FeatureCollection getData() {
 
     final String url = "http://data.cabq.gov/community/opentrails/trail_segments.geojson";
@@ -39,6 +46,12 @@ public class DataMapper {
     return collection;
   }
 
+  /**
+   *
+   * @param collection
+   * @param repository
+   * @throws JsonProcessingException
+   */
   public static void mapTrail(FeatureCollection collection, TrailRepository repository)
       throws JsonProcessingException {
     ObjectMapper mapper = new ObjectMapper();
@@ -76,9 +89,20 @@ public class DataMapper {
   }
   }
 
+  /**
+   *
+   * @param o
+   * @return
+   */
   public static Long convertToLong(Object o) {
     return new Long(o.toString());
   }
+
+  /**
+   *
+   * @param o
+   * @return
+   */
   public static boolean convertToBool(Object o) {
     String status = o.toString();
     return status.equals("yes");

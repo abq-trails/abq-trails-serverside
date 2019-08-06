@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.UUID;
 import org.springframework.data.repository.CrudRepository;
 
+/**
+ * Performs CRUD operations on {@link Trail} and {@link User} entity instances.
+ */
 public interface ReviewRepository extends CrudRepository<Review, UUID> {
 
   List<Review> getAllByTrailOrderByCreatedDesc (Trail trail);

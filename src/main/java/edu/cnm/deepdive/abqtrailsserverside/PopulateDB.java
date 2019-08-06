@@ -7,6 +7,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ *
+ */
 @SpringBootApplication
 public class PopulateDB implements CommandLineRunner {
 
@@ -21,6 +24,10 @@ public class PopulateDB implements CommandLineRunner {
     DataMapper.mapTrail(DataMapper.getData(), trailRepository);
   }
 
+  /**
+   *
+   * @param args
+   */
   public static void main(String[] args) {
     SpringApplication.run(PopulateDB.class, args);
   }

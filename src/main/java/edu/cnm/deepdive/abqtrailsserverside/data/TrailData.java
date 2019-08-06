@@ -4,15 +4,21 @@ import java.util.List;
 import java.util.Map;
 import org.geojson.FeatureCollection;
 
+/**
+ *
+ */
 public class TrailData {
 
-  public FeatureCollection features;
-  public String type;
+  public FeatureCollection features; /**    */
+  public String type; /**    */
 
+  /**
+   *
+   */
   public static class Feature {
-   public Map<String, Object> geometry;
-   public Properties properties;
-   public String type;
+   public Map<String, Object> geometry; /**    */
+   public Properties properties; /**    */
+   public String type; /**    */
   }
 
 //  public static class Geometry {
@@ -20,18 +26,23 @@ public class TrailData {
 //    public String type;
 //  }
 
+  /**
+   *
+   */
   public static class Properties {
 
+    /** */
     public String bicycle;
-    public String foot;
-    public String horse;
-    public String id;
-    public String motorVehicles;
-    public String name;
-    public String osmTags;
-    public String ski;
-    public String stewardId;
-    public String wheelchair;
+    /** */
+    public String foot; /**    */
+    public String horse; /**    */
+    public String id; /**    */
+    public String motorVehicles; /**    */
+    public String name; /**    */
+    public String osmTags; /**    */
+    public String ski; /**    */
+    public String stewardId; /**    */
+    public String wheelchair; /**    */
   }
 
 }

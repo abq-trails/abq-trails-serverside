@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.UUID;
 import org.springframework.data.repository.CrudRepository;
 
+
+/**
+ * Performs CRUD operations on {@link Trail} entity instances.
+ */
 public interface TrailRepository extends CrudRepository<Trail, UUID> {
 
   List<Trail> getAllByOrderByCabqId ();

@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ *
+ */
 @RestController
 @ExposesResourceFor(User.class)
 @RequestMapping("users")
@@ -28,20 +31,38 @@ public class UserController {
 
   private final UserRepository repository;
 
+  /**
+   *
+   * @param repository
+   */
   public UserController(UserRepository repository) {
     this.repository = repository;
   }
 
+  /**
+   *
+   * @param id
+   * @return
+   */
   @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public User get(@PathVariable("id") UUID id) {
     return repository.findById(id).get();
   }
 
+  /**
+   *
+   * @return
+   */
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<User> list() {
     return repository.getAllByOrderByUsername();
   }
 
+  /**
+   *
+   * @param user
+   * @return
+   */
   @PostMapping(
       consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<User> post(@RequestBody User user) {
@@ -49,12 +70,19 @@ public class UserController {
     return ResponseEntity.created(user.getHref()).body(user);
   }
 
+  /**
+   *
+   * @param id
+   */
   @DeleteMapping(value = "{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void delete(@PathVariable("id") UUID id) {
     repository.delete(get(id));
   }
 
+  /**
+   *
+   */
   @ResponseStatus(value = HttpStatus.NOT_FOUND)
   @ExceptionHandler(NoSuchElementException.class)
   public void notFound() {

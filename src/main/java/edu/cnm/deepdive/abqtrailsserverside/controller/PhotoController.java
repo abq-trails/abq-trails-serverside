@@ -22,6 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Defines REST endpoints for servicing requests on {@link Photo} resources, invoking {@link
+ * PhotoRepository} methods to perform the required operations.
+ */
 @RestController
 @RequestMapping("photos")
 @ExposesResourceFor(Photo.class)
@@ -29,30 +33,57 @@ public class PhotoController {
 
   private final PhotoRepository repository;
 
+  /**
+   * Initializes this instance, injecting an instance of {@link PhotoRepository}.
+   *
+   * @param repository repository used for operations on {@link Photo} entity instances.
+   */
   public PhotoController(PhotoRepository repository) {
     this.repository = repository;
   }
 
+  /**
+   * Returns a list of all photos.
+   */
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Photo> list() {
     return repository.getAllByOrderByCreatedDesc();
   }
 
-  @GetMapping(value = "search", params = "user", produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<Photo> search(@RequestParam(value = "user", required = true) Trail trailName) {
+  /**
+   * Returns a list of photos associated with specified trail.
+   * @param trailName name of trail.
+   * @return list of photos.
+   */
+  @GetMapping(value = "search", params = "trail", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Photo> search(@RequestParam(value = "trail", required = true) Trail trailName) {
     return repository.getAllByTrailOrderByCreatedDesc(trailName);
   }
 
-  @GetMapping(value = "search", params = "trail", produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<Photo> search(@RequestParam(value = "trail", required = true) User userName) {
+  /**
+   * Returns list of photos by username.
+   * @param userName username of user.
+   * @return list of photos by username.
+   */
+  @GetMapping(value = "search", params = "user", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Photo> search(@RequestParam(value = "user", required = true) User userName) {
     return repository.getAllByUserOrderByCreatedDesc(userName);
   }
 
+  /**
+   * Gets the specified photo.
+   * @param id for photo.
+   */
   @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public Photo get(@PathVariable("id") UUID id) {
     return repository.findById(id).get();
   }
 
+  /**
+   * Adds the provided {@link Photo} resource to the database and returns the completed resource.
+   * @param photo {@link Photo} resource.
+   * @return {@link Photo} resource
+   */
   @PostMapping(
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
@@ -61,12 +92,20 @@ public class PhotoController {
     return ResponseEntity.created(photo.getHref()).body(photo);
   }
 
+  /**
+   * Deletes the specified {@link Photo} resource from the database.
+   * @param id photo {@link UUID}.
+   */
   @DeleteMapping(value = "{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void delete(@PathVariable("id") UUID id) {
     repository.delete(get(id));
   }
 
+  /**
+   * Maps (via annotation) a {@link NoSuchElementException} to a response status code of {@link
+   * HttpStatus#NOT_FOUND}.
+   */
   @ResponseStatus(value = HttpStatus.NOT_FOUND)
   @ExceptionHandler(NoSuchElementException.class)
   public void notFound() {}

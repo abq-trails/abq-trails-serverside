@@ -4,11 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.net.URL;
 
+/**
+ * Converts object(Trail Data?) into JSON.
+ */
 public class JSONConverter {
 
-  ObjectMapper objectMapper = new ObjectMapper();
+  ObjectMapper objectMapper = new ObjectMapper(); /** Creates Object of ObjectMapper defined in Jackson Api */
 
-  TrailData trailData;
+  TrailData trailData; /** Trail Data */
 
   {
     try {

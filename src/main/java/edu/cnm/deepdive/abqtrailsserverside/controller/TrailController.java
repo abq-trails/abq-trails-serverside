@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ *
+ */
 @RestController
 @ExposesResourceFor(Trail.class)
 @RequestMapping("trails")
@@ -27,31 +30,56 @@ public class TrailController {
 
   private TrailRepository repository;
 
+  /**
+   *
+   * @param repository
+   */
   public TrailController(TrailRepository repository) {
     this.repository = repository;
   }
 
+  /**
+   *
+   * @param id
+   * @return
+   */
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
   public Trail getTrail(@PathVariable UUID id) {
     return repository.findById(id).get();
   }
 
+  /**
+   *
+   * @param fragment
+   * @return
+   */
   @GetMapping(value = "search", params = "nameFrag", produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Trail> search(@RequestParam(value = "nameFrag", required = true) String fragment) {
     return repository.findAllByNameContainingOrderByCabqId(fragment);
   }
 
+  /**
+   *
+   * @param cabqId
+   * @return
+   */
   @GetMapping(value = "search", params = "cabqId", produces = MediaType.APPLICATION_JSON_VALUE)
   public Trail get(@RequestParam(value = "cabqId", required = true) Long cabqId) {
     return repository.findByCabqId(cabqId);
   }
 
+  /**
+   *
+   * @return
+   */
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Trail> list() {
     return repository.getAllByOrderByCabqId();
   }
 
-
+  /**
+   *
+   */
   @ResponseStatus(value = HttpStatus.NOT_FOUND)
   @ExceptionHandler(NoSuchElementException.class)
   public void notFound() {

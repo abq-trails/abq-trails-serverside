@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.UUID;
 import org.springframework.data.repository.CrudRepository;
 
+/**
+ *  Performs CRUD operations on {@link Photo} entity instances.
+ */
 public interface PhotoRepository extends CrudRepository<Photo, UUID> {
 
   List<Photo> getAllByTrailOrderByCreatedDesc (Trail trail);

@@ -23,37 +23,68 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ *
+ */
 @RestController
 @ExposesResourceFor(Review.class)
 @RequestMapping("ratings")
 public class ReviewController {
 
   private final ReviewRepository repository;
-  
+
+  /**
+   *
+   * @param repository
+   */
   public ReviewController(ReviewRepository repository) {
     this.repository = repository;
   }
 
+  /**
+   *
+   * @return
+   */
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Review> list() {
     return repository.getAllByOrderByCreatedDesc();
   }
 
+  /**
+   *
+   * @param id
+   * @return
+   */
   @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public Review get(@PathVariable("id") UUID id) {
     return repository.findById(id).get();
   }
 
+  /**
+   *
+   * @param user
+   * @return
+   */
   @GetMapping(value = "search", params = "user",produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Review> search(@RequestParam(value = "user", required = true) User user) {
     return repository.getAllByUserOrderByCreatedDesc(user);
   }
 
+  /**
+   *
+   * @param trail
+   * @return
+   */
   @GetMapping(value = "search", params = "trail", produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Review> search(@RequestParam(value = "trail", required = true) Trail trail) {
     return repository.getAllByTrailOrderByCreatedDesc(trail);
   }
 
+  /**
+   *
+   * @param review
+   * @return
+   */
   //TODO Build this so that it returns username rather than uuid (see Genre I think).
   @PostMapping(
       consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -62,6 +93,12 @@ public class ReviewController {
     return ResponseEntity.created(review.getHref()).body(review);
   }
 
+  /**
+   *
+   * @param id
+   * @param review
+   * @return
+   */
   @PutMapping(value = "{id}",
       consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public Review put(@PathVariable("id") UUID id, @RequestBody Review review) {
@@ -75,12 +112,19 @@ public class ReviewController {
     return existingReview;
   }
 
+  /**
+   *
+   * @param id
+   */
   @DeleteMapping(value = "{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void delete(@PathVariable("id") UUID id) {
     repository.delete(get(id));
   }
 
+  /**
+   *
+   */
   @ResponseStatus(value = HttpStatus.NOT_FOUND)
   @ExceptionHandler(NoSuchElementException.class)
   public void notFound() {

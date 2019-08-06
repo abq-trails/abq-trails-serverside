@@ -35,6 +35,9 @@ import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ *
+ */
 @Configuration
 @SpringBootApplication
 @EnableWebSecurity
@@ -46,7 +49,10 @@ public class AbqTrailsServersideApplication extends ResourceServerConfigurerAdap
   @Value("${oauth.clientId}")
   private String clientId;
 
-
+  /**
+   *
+   * @param args
+   */
   public static void main(String[] args) {
     SpringApplication.run(AbqTrailsServersideApplication.class, args);
 //   getData();
