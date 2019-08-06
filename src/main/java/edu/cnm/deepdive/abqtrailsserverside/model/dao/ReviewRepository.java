@@ -9,10 +9,12 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ReviewRepository extends CrudRepository<Review, UUID> {
 
-  List<Review> getAllByTrailOrderByCreatedDesc (Trail trail);
+  List<Review> getAllByTrailOrderByCreatedDesc(Trail trail);
 
-  List<Review> getAllByUserOrderByCreatedDesc (User user);
+  List<Review> getAllByUserOrderByCreatedDesc(User user);
 
-  List<Review> getAllByOrderByCreatedDesc ();
+  List<Review> getAllByOrderByCreatedDesc();
+
+  List<Review> findAllByCabqId(long cabqId);
 
 }
