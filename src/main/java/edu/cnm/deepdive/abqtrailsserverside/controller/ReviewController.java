@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @ExposesResourceFor(Review.class)
-@RequestMapping("ratings")
+@RequestMapping("reviews")
 public class ReviewController {
 
   private final ReviewRepository repository;
@@ -52,6 +52,11 @@ public class ReviewController {
   @GetMapping(value = "search", params = "trail", produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Review> search(@RequestParam(value = "trail", required = true) Trail trail) {
     return repository.getAllByTrailOrderByCreatedDesc(trail);
+  }
+
+  @GetMapping(value = "search", params = "cabqId", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Review> search(@RequestParam(value = "cabqId", required = true) Long cabqId) {
+    return repository.findAllByCabqId(cabqId);
   }
 
   //TODO Build this so that it returns username rather than uuid (see Genre I think).
