@@ -34,14 +34,14 @@ import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.RestTemplate;
 
 /**
- *
+ * Pulls from the Cabq Data source and populates the trail table.
  */
 public class DataMapper {
 
   private static FeatureCollection collection = null;
 
   /**
-   *
+   * Makes the call to the Cabq data and puts it into a feature collection.
    * @return
    */
   public static FeatureCollection getData() {
@@ -64,9 +64,9 @@ public class DataMapper {
   }
 
   /**
-   *
-   * @param collection
-   * @param repository
+   * Adds feature to trail entity.
+   * @param collection FeatureCollection.
+   * @param repository trail repository.
    * @throws JsonProcessingException
    */
   public static void mapTrail(FeatureCollection collection, TrailRepository repository)
@@ -107,18 +107,18 @@ public class DataMapper {
   }
 
   /**
-   *
-   * @param o
-   * @return
+   * Converts the id from the CABQ data from an object to a long.
+   * @param o the id property from the FeatureCollection.
+   * @return returns a long value.
    */
   public static Long convertToLong(Object o) {
     return new Long(o.toString());
   }
 
   /**
-   *
-   * @param o
-   * @return
+   * Converts the yes/no string values for horse and bike properties in the CABQ data to a boolean value.
+   * @param o The horse and/or bike property objects from the FeatureCollection.
+   * @return a boolean value.
    */
   public static boolean convertToBool(Object o) {
     String status = o.toString();

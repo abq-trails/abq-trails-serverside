@@ -28,7 +28,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
 /**
- * Called when this application is starting??
+ * Called when this application is starting.
  */
 @Configuration
 @SpringBootApplication
@@ -42,7 +42,7 @@ public class AbqTrailsServersideApplication extends ResourceServerConfigurerAdap
   private String clientId;
 
   /**
-   *
+   * Run AbqTrailsServersideApplication.
    */
   public static void main(String[] args) {
     SpringApplication.run(AbqTrailsServersideApplication.class, args);

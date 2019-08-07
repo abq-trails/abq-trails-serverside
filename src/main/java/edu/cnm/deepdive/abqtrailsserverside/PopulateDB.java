@@ -23,7 +23,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Populates ?? what???
+ * Runs the class that pulls from the Cabq Data source and populates the trail table.
  */
 @SpringBootApplication
 public class PopulateDB implements CommandLineRunner {
@@ -34,7 +34,7 @@ public class PopulateDB implements CommandLineRunner {
   private TrailRepository trailRepository;
 
   /**
-   * ??
+   * Facilitates communication between the entity and the RoomDatabase.
    */
   public static void main(String[] args) {
     SpringApplication.run(PopulateDB.class, args);
