@@ -14,7 +14,7 @@
  *     limitations under the License.
  */
 
-package edu.cnm.deepdive.abqtrailsserverside;
+package edu.cnm.deepdive.abqtrailsserverside.service;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
@@ -48,7 +48,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class GoogleTokenServices implements ResourceServerTokenServices {
 
-  private final AccessTokenConverter converter = new DefaultAccessTokenConverter();
   @Value("${oauth.clientId}")
   private String clientId;
 
