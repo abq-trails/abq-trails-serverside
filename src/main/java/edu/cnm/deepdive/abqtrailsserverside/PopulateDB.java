@@ -52,4 +52,5 @@ public class PopulateDB implements CommandLineRunner {
     DataMapper.mapTrail(DataMapper.getData(), trailRepository);
   }
 
+
 }
