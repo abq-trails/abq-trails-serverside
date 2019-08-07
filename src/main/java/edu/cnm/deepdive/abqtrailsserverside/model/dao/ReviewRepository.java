@@ -34,4 +34,6 @@ public interface ReviewRepository extends CrudRepository<Review, UUID> {
 
   List<Review> getAllByOrderByCreatedDesc();
 
+  List<Review> findAllByCabqId(long cabqId);
+
 }

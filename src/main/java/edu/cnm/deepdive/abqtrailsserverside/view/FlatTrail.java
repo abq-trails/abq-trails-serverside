@@ -34,7 +34,7 @@ public interface FlatTrail {
 
   String getName();
 
-  Long getCabqId();
+  long getCabqId();
 
   double getLength();
 

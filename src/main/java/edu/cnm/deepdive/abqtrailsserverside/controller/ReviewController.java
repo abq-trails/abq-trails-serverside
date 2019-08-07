@@ -17,6 +17,8 @@
 package edu.cnm.deepdive.abqtrailsserverside.controller;
 
 import edu.cnm.deepdive.abqtrailsserverside.model.dao.ReviewRepository;
+import edu.cnm.deepdive.abqtrailsserverside.model.dao.TrailRepository;
+import edu.cnm.deepdive.abqtrailsserverside.model.dao.UserRepository;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.Review;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.Trail;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.User;
@@ -45,10 +47,16 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @ExposesResourceFor(Review.class)
-@RequestMapping("ratings")
+@RequestMapping("reviews")
 public class ReviewController {
 
   private final ReviewRepository repository;
+  private final TrailRepository trailRepository;
+  private final UserRepository userRepository;
+
+  public ReviewController(ReviewRepository repository,
+      TrailRepository trailRepository,
+      UserRepository userRepository) {
 
   /**
    * Initializes this instance, injecting an instance of {@link ReviewRepository}.
@@ -57,6 +65,8 @@ public class ReviewController {
    */
   public ReviewController(ReviewRepository repository) {
     this.repository = repository;
+    this.trailRepository = trailRepository;
+    this.userRepository = userRepository;
   }
 
   /**
@@ -97,6 +107,11 @@ public class ReviewController {
     return repository.getAllByTrailOrderByCreatedDesc(trail);
   }
 
+  @GetMapping(value = "search", params = "cabqId", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Review> search(@RequestParam(value = "cabqId", required = true) Long cabqId) {
+    return repository.findAllByCabqId(cabqId);
+  }
+
   /**
    * Adds the provided {@link Review} resource to the database and returns the completed resource.
    * @param review {@link Review} resource.
@@ -106,6 +121,10 @@ public class ReviewController {
   @PostMapping(
       consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Review> post(@RequestBody Review review) {
+    Trail trail = trailRepository.findByCabqId(review.getTrail().getCabqId()).get();
+    User user = userRepository.getByUsername(review.getUser().getUsername()).get();
+    review.setTrail(trail);
+    review.setUser(user);
     repository.save(review);
     return ResponseEntity.created(review.getHref()).body(review);
   }

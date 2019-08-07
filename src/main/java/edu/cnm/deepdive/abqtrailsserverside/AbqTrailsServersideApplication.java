@@ -36,7 +36,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @EnableResourceServer
 public class AbqTrailsServersideApplication extends ResourceServerConfigurerAdapter {
 
-//  static ResponseEntity<byte[]> result;
 
   @Value("${oauth.clientId}")
   private String clientId;
@@ -46,27 +45,7 @@ public class AbqTrailsServersideApplication extends ResourceServerConfigurerAdap
    */
   public static void main(String[] args) {
     SpringApplication.run(AbqTrailsServersideApplication.class, args);
-//   getData();
   }
-
-//  private static void getData() {
-//
-//    final String url = "http://data.cabq.gov/community/opentrails/trail_segments.geojson";
-//    RestTemplate template = new RestTemplate();
-//    FeatureCollection collection = null;
-//    try {
-//      collection = template.execute(new URI(url), HttpMethod.GET, (RequestCallback) null, clientHttpResponse -> {
-//        File ret = File.createTempFile("download", "tmp");
-//        StreamUtils.copy(clientHttpResponse.getBody(), new FileOutputStream(ret));
-//        ObjectMapper mapper = new ObjectMapper();
-//        return mapper.readValue(ret, FeatureCollection.class);
-//      });
-//    } catch (URISyntaxException e) {
-//      e.printStackTrace();
-//    }
-//    System.out.println(collection.getFeatures().size());
-//
-//  }
 
   @Override
   public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -78,5 +57,6 @@ public class AbqTrailsServersideApplication extends ResourceServerConfigurerAdap
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.authorizeRequests().anyRequest()
         .anonymous(); //TODO Change to hasRole("USER") from anonymous.
+    //    http.authorizeRequests().anyRequest().hasRole("USER");
   }
 }

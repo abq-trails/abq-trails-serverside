@@ -17,11 +17,13 @@ package edu.cnm.deepdive.abqtrailsserverside;
 
 import edu.cnm.deepdive.abqtrailsserverside.data.DataMapper;
 import edu.cnm.deepdive.abqtrailsserverside.model.dao.TrailRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
+@Component
+//Comment @Profile out the first time you run the application. Then, stop, un-comment, and re-run.
+@Profile("!default")
 /**
  * Runs the class that pulls from the Cabq Data source and populates the trail table.
  */
@@ -30,8 +32,11 @@ public class PopulateDB implements CommandLineRunner {
 
   //TODO Figure out why this runs everytime you run the serverside application and stop it.
 
-  @Autowired
   private TrailRepository trailRepository;
+
+  public PopulateDB(TrailRepository trailRepository) {
+    this.trailRepository = trailRepository;
+  }
 
   /**
    * Facilitates communication between the entity and the RoomDatabase.
@@ -42,7 +47,7 @@ public class PopulateDB implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-
     DataMapper.mapTrail(DataMapper.getData(), trailRepository);
   }
+
 }

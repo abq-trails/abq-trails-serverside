@@ -52,6 +52,8 @@ public class GoogleTokenServices implements ResourceServerTokenServices {
   @Value("${oauth.clientId}")
   private String clientId;
 
+  private final AccessTokenConverter converter = new DefaultAccessTokenConverter();
+
   @Override
   public OAuth2Authentication loadAuthentication(String accessToken)
       throws AuthenticationException, InvalidTokenException {
@@ -63,8 +65,7 @@ public class GoogleTokenServices implements ResourceServerTokenServices {
           .build();
       GoogleIdToken idToken = verifier.verify(accessToken);
       if (idToken != null) {
-        Payload payload = idToken
-            .getPayload(); //Payload may contain more useful info than we're using.
+        Payload payload = idToken.getPayload(); //Payload may contain more useful info than we're using.
         //TODO Check user registry (if any) to see what roles should be granted.
         Collection<GrantedAuthority> grants =
             Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));

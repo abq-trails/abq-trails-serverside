@@ -50,13 +50,12 @@ public class DataMapper {
     RestTemplate template = new RestTemplate();
 //    FeatureCollection collection = null;
     try {
-      collection = template
-          .execute(new URI(url), HttpMethod.GET, (RequestCallback) null, clientHttpResponse -> {
-            File ret = File.createTempFile("download", "tmp");
-            StreamUtils.copy(clientHttpResponse.getBody(), new FileOutputStream(ret));
-            ObjectMapper mapper = new ObjectMapper();
-            return mapper.readValue(ret, FeatureCollection.class);
-          });
+      collection = template.execute(new URI(url), HttpMethod.GET, (RequestCallback) null, clientHttpResponse -> {
+        File ret = File.createTempFile("download", "tmp");
+        StreamUtils.copy(clientHttpResponse.getBody(), new FileOutputStream(ret));
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(ret, FeatureCollection.class);
+      });
     } catch (URISyntaxException e) {
       e.printStackTrace();
     }
@@ -75,35 +74,35 @@ public class DataMapper {
 
 //    List<Trail> trails = new LinkedList<>();
 
-    for (Feature feature : collection.getFeatures()) {
-      feature.getId();
-      GeoJsonObject geometry = feature.getGeometry();
-      Map properties = feature.getProperties();
-      long cabqId = convertToLong(properties.get("id"));
-      if (repository.findByCabqId(cabqId) == null) {
-        Trail trail = new Trail();
-        trail.setCabqId(cabqId);
-        if (properties.get("name") != null) {
-          trail.setName(properties.get("name").toString());
-        }
-        if (geometry != null) {
+  for (Feature feature: collection.getFeatures()) {
+    feature.getId();
+    GeoJsonObject geometry = feature.getGeometry();
+    Map properties = feature.getProperties();
+    long cabqId = convertToLong(properties.get("id"));
+    if (!repository.findByCabqId(cabqId).isPresent()) {
+      Trail trail = new Trail();
+      trail.setCabqId(cabqId);
+      if (properties.get("name") != null) {
+        trail.setName(properties.get("name").toString());
+      }
+      if (geometry != null) {
 //        System.out.println(geometry.toString());
-          String json = mapper.writeValueAsString(geometry);
+        String json = mapper.writeValueAsString(geometry);
 //        Geometry geo = reader.read(json);
-          trail.setCoordinates(json);
+        trail.setCoordinates(json);
 //        geometry.
 //        trail.setCoordinates(GeometryFactory);
 //        trail.setCoordinates(geometry);
-        }
-        if (properties.get("bicycle") != null) {
-          trail.setBike(convertToBool(properties.get("bicycle")));
-        }
-        if (properties.get("horse") != null) {
-          trail.setHorse(convertToBool(properties.get("horse")));
-        }
-        repository.save(trail);
       }
+      if (properties.get("bicycle") != null) {
+        trail.setBike(convertToBool(properties.get("bicycle")));
+      }
+      if (properties.get("horse") != null) {
+        trail.setHorse(convertToBool(properties.get("horse")));
+      }
+      repository.save(trail);
     }
+  }
   }
 
   /**
@@ -112,7 +111,9 @@ public class DataMapper {
    * @return returns a long value.
    */
   public static Long convertToLong(Object o) {
-    return new Long(o.toString());
+    String str = o.toString();
+    long id = Long.parseLong(str);
+    return id;
   }
 
   /**

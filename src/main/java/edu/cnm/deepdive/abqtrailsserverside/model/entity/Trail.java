@@ -72,7 +72,7 @@ public class Trail implements FlatTrail {
 
   @NonNull
   @Column(name = "cabq_id", nullable = false)
-  private Long cabqId;
+  private long cabqId;
 
   @NonNull
   @Column(name = "trail_name", nullable = false)
@@ -134,10 +134,11 @@ public class Trail implements FlatTrail {
    * Returns cabqId for this instance.
    */
   @NonNull
-  public Long getCabqId() {
+  public long getCabqId() {
     return cabqId;
   }
 
+  public void setCabqId(@NonNull long cabqId) {
   /**
    * Sets cabqId for this instance.
    */

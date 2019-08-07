@@ -17,6 +17,7 @@
 package edu.cnm.deepdive.abqtrailsserverside.controller;
 
 import edu.cnm.deepdive.abqtrailsserverside.model.dao.UserRepository;
+import edu.cnm.deepdive.abqtrailsserverside.model.entity.Trail;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.User;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -54,12 +56,11 @@ public class UserController {
   public UserController(UserRepository repository) {
     this.repository = repository;
   }
-
   /**
    * Gets the specified user.
    * @param id for user.
    */
-  @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(value = "{id}",produces = MediaType.APPLICATION_JSON_VALUE)
   public User get(@PathVariable("id") UUID id) {
     return repository.findById(id).get();
   }
