@@ -67,6 +67,10 @@ public class Review {
   @Column(nullable = false)
   private int rating;
 
+  @NonNull
+  @Column(name = "cabq_id", nullable = false)
+  private Long cabqId;
+
   private String review;
 
   public UUID getId() {
@@ -103,6 +107,15 @@ public class Review {
 
   public void setRating(int rating) {
     this.rating = rating;
+  }
+
+  @NonNull
+  public Long getCabqId() {
+    return cabqId;
+  }
+
+  public void setCabqId(@NonNull Long cabqId) {
+    this.cabqId = cabqId;
   }
 
   public String getReview() {

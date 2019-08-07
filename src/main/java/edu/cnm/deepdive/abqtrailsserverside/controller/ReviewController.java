@@ -62,6 +62,11 @@ public class ReviewController {
     return repository.getAllByTrailOrderByCreatedDesc(trail);
   }
 
+  @GetMapping(value = "search", params = "cabqId", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Review> search(@RequestParam(value = "cabqId", required = true) Long cabqId) {
+    return repository.findAllByCabqId(cabqId);
+  }
+
   //TODO Build this so that it returns username rather than uuid (see Genre I think).
   @PostMapping(
       consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
