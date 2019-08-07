@@ -1,18 +1,20 @@
-//Copyright 2019 Denelle Britton Linebarger, Alana Chigbrow, Anita Martin, David Nelson
-//
-//    Licensed under the Apache License, Version 2.0 (the "License");
-//    you may not use this file except in compliance with the License.
-//    You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-//    Unless required by applicable law or agreed to in writing, software
-//    distributed under the License is distributed on an "AS IS" BASIS,
-//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//    See the License for the specific language governing permissions and
-//    limitations under the License.
+/*
+ * Copyright 2019 Denelle Britton Linebarger, Alana Chigbrow, Anita Martin, David Nelson
+ *
+ *     Licensed under the Apache License, Version 2.0 (the "License");
+ *     you may not use this file except in compliance with the License.
+ *     You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *     Unless required by applicable law or agreed to in writing, software
+ *     distributed under the License is distributed on an "AS IS" BASIS,
+ *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *     See the License for the specific language governing permissions and
+ *     limitations under the License.
+ */
 
-    package edu.cnm.deepdive.abqtrailsserverside.controller;
+package edu.cnm.deepdive.abqtrailsserverside.controller;
 
 import edu.cnm.deepdive.abqtrailsserverside.model.dao.PhotoRepository;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.Photo;
@@ -66,7 +68,9 @@ public class PhotoController {
 
   /**
    * Returns a list of photos associated with specified trail.
+   *
    * @param trailName name of trail.
+   *
    * @return list of photos.
    */
   @GetMapping(value = "search", params = "trail", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -76,7 +80,9 @@ public class PhotoController {
 
   /**
    * Returns list of photos by username.
+   *
    * @param userName username of user.
+   *
    * @return list of photos by username.
    */
   @GetMapping(value = "search", params = "user", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -86,6 +92,7 @@ public class PhotoController {
 
   /**
    * Gets the specified photo.
+   *
    * @param id for photo.
    */
   @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -95,7 +102,9 @@ public class PhotoController {
 
   /**
    * Adds the provided {@link Photo} resource to the database and returns the completed resource.
+   *
    * @param photo {@link Photo} resource.
+   *
    * @return {@link Photo} resource
    */
   @PostMapping(
@@ -108,6 +117,7 @@ public class PhotoController {
 
   /**
    * Deletes the specified {@link Photo} resource from the database.
+   *
    * @param id photo {@link UUID}.
    */
   @DeleteMapping(value = "{id}")
@@ -122,5 +132,6 @@ public class PhotoController {
    */
   @ResponseStatus(value = HttpStatus.NOT_FOUND)
   @ExceptionHandler(NoSuchElementException.class)
-  public void notFound() {}
+  public void notFound() {
+  }
 }

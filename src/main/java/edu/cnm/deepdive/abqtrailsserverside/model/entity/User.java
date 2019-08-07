@@ -1,16 +1,18 @@
-//Copyright 2019 Denelle Britton Linebarger, Alana Chigbrow, Anita Martin, David Nelson
-//
-//    Licensed under the Apache License, Version 2.0 (the "License");
-//    you may not use this file except in compliance with the License.
-//    You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-//    Unless required by applicable law or agreed to in writing, software
-//    distributed under the License is distributed on an "AS IS" BASIS,
-//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//    See the License for the specific language governing permissions and
-//    limitations under the License.
+/*
+ * Copyright 2019 Denelle Britton Linebarger, Alana Chigbrow, Anita Martin, David Nelson
+ *
+ *     Licensed under the Apache License, Version 2.0 (the "License");
+ *     you may not use this file except in compliance with the License.
+ *     You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *     Unless required by applicable law or agreed to in writing, software
+ *     distributed under the License is distributed on an "AS IS" BASIS,
+ *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *     See the License for the specific language governing permissions and
+ *     limitations under the License.
+ */
 
 package edu.cnm.deepdive.abqtrailsserverside.model.entity;
 
@@ -37,6 +39,9 @@ import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
+/**
+ * Returns and sets data for <code>User</code> entity.
+ */
 @Entity(name = "user_profile")
 @Component
 public class User implements FlatUser {
@@ -100,10 +105,16 @@ public class User implements FlatUser {
     return updated;
   }
 
+  /**
+   * Returns list of photos for this instance.
+   */
   public List<Photo> getPhotos() {
     return photos;
   }
 
+  /**
+   * Returns list of reviews for this instance.
+   */
   public List<Review> getReviews() {
     return reviews;
   }
@@ -113,6 +124,9 @@ public class User implements FlatUser {
     return username;
   }
 
+  /**
+   * Sets username for this instance.
+   */
   public void setUsername(String username) {
     this.username = username;
   }
@@ -122,6 +136,9 @@ public class User implements FlatUser {
     return authenticatedId;
   }
 
+  /**
+   * Sets authenticatedId for this instance.
+   */
   public void setAuthenticatedId(String authenticatedId) {
     this.authenticatedId = authenticatedId;
   }
@@ -131,6 +148,9 @@ public class User implements FlatUser {
     return firstName;
   }
 
+  /**
+   * Sets firstName for this instance.
+   */
   public void setFirstName(String firstName) {
     this.firstName = firstName;
   }
@@ -140,6 +160,9 @@ public class User implements FlatUser {
     return lastName;
   }
 
+  /**
+   * Sets lastName for this instance.
+   */
   public void setLastName(String lastName) {
     this.lastName = lastName;
   }

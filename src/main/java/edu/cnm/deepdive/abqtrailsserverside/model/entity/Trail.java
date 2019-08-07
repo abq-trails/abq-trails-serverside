@@ -1,16 +1,18 @@
-//Copyright 2019 Denelle Britton Linebarger, Alana Chigbrow, Anita Martin, David Nelson
-//
-//    Licensed under the Apache License, Version 2.0 (the "License");
-//    you may not use this file except in compliance with the License.
-//    You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-//    Unless required by applicable law or agreed to in writing, software
-//    distributed under the License is distributed on an "AS IS" BASIS,
-//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//    See the License for the specific language governing permissions and
-//    limitations under the License.
+/*
+ * Copyright 2019 Denelle Britton Linebarger, Alana Chigbrow, Anita Martin, David Nelson
+ *
+ *     Licensed under the Apache License, Version 2.0 (the "License");
+ *     you may not use this file except in compliance with the License.
+ *     You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *     Unless required by applicable law or agreed to in writing, software
+ *     distributed under the License is distributed on an "AS IS" BASIS,
+ *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *     See the License for the specific language governing permissions and
+ *     limitations under the License.
+ */
 
 package edu.cnm.deepdive.abqtrailsserverside.model.entity;
 
@@ -38,6 +40,9 @@ import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
+/**
+ * Returns and sets data for <code>Trail</code> entity.
+ */
 @Entity(name = "trail_table")
 @Component
 public class Trail implements FlatTrail {
@@ -111,19 +116,31 @@ public class Trail implements FlatTrail {
     return updated;
   }
 
+  /**
+   * Returns list of photos for this instance.
+   */
   public List<Photo> getPhotos() {
     return photos;
   }
 
+  /**
+   * Returns list of reviews for this instance.
+   */
   public List<Review> getReviews() {
     return reviews;
   }
 
+  /**
+   * Returns cabqId for this instance.
+   */
   @NonNull
   public Long getCabqId() {
     return cabqId;
   }
 
+  /**
+   * Sets cabqId for this instance.
+   */
   public void setCabqId(@NonNull Long cabqId) {
     this.cabqId = cabqId;
   }
@@ -133,14 +150,23 @@ public class Trail implements FlatTrail {
     return name;
   }
 
+  /**
+   * Sets name for this instance.
+   */
   public void setName(String name) {
     this.name = name;
   }
 
+  /**
+   * Returns coordinates for this instance.
+   */
   public String getCoordinates() {
     return coordinates;
   }
 
+  /**
+   * Sets coordinates for this instance.
+   */
   public void setCoordinates(String coordinates) {
     this.coordinates = coordinates;
   }
@@ -150,6 +176,9 @@ public class Trail implements FlatTrail {
     return length;
   }
 
+  /**
+   * Sets length for this instance.
+   */
   public void setLength(double length) {
     this.length = length;
   }
@@ -159,6 +188,9 @@ public class Trail implements FlatTrail {
     return horse;
   }
 
+  /**
+   * Sets horse flag for this instance.
+   */
   public void setHorse(boolean horse) {
     this.horse = horse;
   }
@@ -168,6 +200,9 @@ public class Trail implements FlatTrail {
     return bike;
   }
 
+  /**
+   * Sets bike flag for this instance.
+   */
   public void setBike(boolean bike) {
     this.bike = bike;
   }
@@ -177,6 +212,9 @@ public class Trail implements FlatTrail {
     return rating;
   }
 
+  /**
+   * Sets rating for this instance.
+   */
   public void setRating(double rating) {
     this.rating = rating;
   }
