@@ -1,3 +1,17 @@
+//Copyright 2019 Denelle Britton Linebarger, Alana Chigbrow, Anita Martin, David Nelson
+//
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+
 package edu.cnm.deepdive.abqtrailsserverside.controller;
 
 import edu.cnm.deepdive.abqtrailsserverside.model.dao.TrailRepository;
@@ -5,15 +19,12 @@ import edu.cnm.deepdive.abqtrailsserverside.model.entity.Trail;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
-import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +43,6 @@ public class TrailController {
 
   /**
    *
-   * @param repository
    */
   public TrailController(TrailRepository repository) {
     this.repository = repository;
@@ -40,8 +50,6 @@ public class TrailController {
 
   /**
    *
-   * @param id
-   * @return
    */
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
   public Trail getTrail(@PathVariable UUID id) {
@@ -50,8 +58,6 @@ public class TrailController {
 
   /**
    *
-   * @param fragment
-   * @return
    */
   @GetMapping(value = "search", params = "nameFrag", produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Trail> search(@RequestParam(value = "nameFrag", required = true) String fragment) {
@@ -60,8 +66,6 @@ public class TrailController {
 
   /**
    *
-   * @param cabqId
-   * @return
    */
   @GetMapping(value = "search", params = "cabqId", produces = MediaType.APPLICATION_JSON_VALUE)
   public Trail get(@RequestParam(value = "cabqId", required = true) Long cabqId) {
@@ -70,7 +74,6 @@ public class TrailController {
 
   /**
    *
-   * @return
    */
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Trail> list() {

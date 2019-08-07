@@ -1,3 +1,17 @@
+//Copyright 2019 Denelle Britton Linebarger, Alana Chigbrow, Anita Martin, David Nelson
+//
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+
 package edu.cnm.deepdive.abqtrailsserverside.controller;
 
 import edu.cnm.deepdive.abqtrailsserverside.model.dao.ReviewRepository;
@@ -35,7 +49,6 @@ public class ReviewController {
 
   /**
    *
-   * @param repository
    */
   public ReviewController(ReviewRepository repository) {
     this.repository = repository;
@@ -43,7 +56,6 @@ public class ReviewController {
 
   /**
    *
-   * @return
    */
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Review> list() {
@@ -52,8 +64,6 @@ public class ReviewController {
 
   /**
    *
-   * @param id
-   * @return
    */
   @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public Review get(@PathVariable("id") UUID id) {
@@ -62,18 +72,14 @@ public class ReviewController {
 
   /**
    *
-   * @param user
-   * @return
    */
-  @GetMapping(value = "search", params = "user",produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(value = "search", params = "user", produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Review> search(@RequestParam(value = "user", required = true) User user) {
     return repository.getAllByUserOrderByCreatedDesc(user);
   }
 
   /**
    *
-   * @param trail
-   * @return
    */
   @GetMapping(value = "search", params = "trail", produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Review> search(@RequestParam(value = "trail", required = true) Trail trail) {
@@ -82,8 +88,6 @@ public class ReviewController {
 
   /**
    *
-   * @param review
-   * @return
    */
   //TODO Build this so that it returns username rather than uuid (see Genre I think).
   @PostMapping(
@@ -95,9 +99,6 @@ public class ReviewController {
 
   /**
    *
-   * @param id
-   * @param review
-   * @return
    */
   @PutMapping(value = "{id}",
       consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -108,13 +109,12 @@ public class ReviewController {
     existingReview.setTrail(review.getTrail());
     existingReview.setUser(review.getUser());
     repository.save(existingReview);
-   //TODO Add in if statement to retrieve user etc. if necessary (see Movie Controller put).
+    //TODO Add in if statement to retrieve user etc. if necessary (see Movie Controller put).
     return existingReview;
   }
 
   /**
    *
-   * @param id
    */
   @DeleteMapping(value = "{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)

@@ -1,29 +1,35 @@
+//Copyright 2019 Denelle Britton Linebarger, Alana Chigbrow, Anita Martin, David Nelson
+//
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+
 package edu.cnm.deepdive.abqtrailsserverside.model.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.cnm.deepdive.abqtrailsserverside.view.FlatTrail;
 import edu.cnm.deepdive.abqtrailsserverside.view.FlatUser;
 import java.net.URI;
 import java.net.URL;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.UUID;
 import javax.annotation.PostConstruct;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
@@ -89,7 +95,6 @@ public class Photo {
 
   /**
    *
-   * @return
    */
   public Date getCreated() {
     return created;
@@ -97,7 +102,6 @@ public class Photo {
 
   /**
    *
-   * @return
    */
   public Date getUpdated() {
     return updated;
@@ -105,7 +109,6 @@ public class Photo {
 
   /**
    *
-   * @return
    */
   public Trail getTrail() {
     return trail;
@@ -113,7 +116,6 @@ public class Photo {
 
   /**
    *
-   * @param trail
    */
   public void setTrail(Trail trail) {
     this.trail = trail;
@@ -121,7 +123,6 @@ public class Photo {
 
   /**
    *
-   * @return
    */
   public User getUser() {
     return user;
@@ -129,7 +130,6 @@ public class Photo {
 
   /**
    *
-   * @param user
    */
   public void setUser(User user) {
     this.user = user;
@@ -137,7 +137,6 @@ public class Photo {
 
   /**
    *
-   * @return
    */
   public URL getPhotoLink() {
     return photoLink;
@@ -145,7 +144,6 @@ public class Photo {
 
   /**
    *
-   * @param photoLink
    */
   public void setPhotoLink(URL photoLink) {
     this.photoLink = photoLink;
@@ -153,7 +151,6 @@ public class Photo {
 
   /**
    *
-   * @return
    */
   public URI getHref() {
     return entityLinks.linkForSingleResource(Photo.class, id).toUri();
@@ -165,7 +162,7 @@ public class Photo {
   }
 
   @Autowired
-  private void  setEntityLinks(EntityLinks entityLinks) {
+  private void setEntityLinks(EntityLinks entityLinks) {
     Photo.entityLinks = entityLinks;
   }
 
