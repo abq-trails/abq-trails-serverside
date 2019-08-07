@@ -54,34 +54,29 @@ public class ReviewController {
   private final TrailRepository trailRepository;
   private final UserRepository userRepository;
 
-  public ReviewController(ReviewRepository repository,
-      TrailRepository trailRepository,
-      UserRepository userRepository) {
 
   /**
    * Initializes this instance, injecting an instance of {@link ReviewRepository}.
    *
    * @param repository repository used for operations on {@link Review} entity instances.
    */
-  public ReviewController(ReviewRepository repository) {
+  public ReviewController(ReviewRepository repository,
+      TrailRepository trailRepository,
+      UserRepository userRepository) {
     this.repository = repository;
     this.trailRepository = trailRepository;
     this.userRepository = userRepository;
   }
 
-  /**
-   * Returns a list of all reviews.
-   */
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Review> list() {
     return repository.getAllByOrderByCreatedDesc();
   }
 
   /**
-   * Gets the specified review.
-   *
-   * @param id for review.
+   * Returns a list of all reviews.
    */
+
   @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public Review get(@PathVariable("id") UUID id) {
     return repository.findById(id).get();
@@ -107,13 +102,22 @@ public class ReviewController {
     return repository.getAllByTrailOrderByCreatedDesc(trail);
   }
 
+
+  /**
+   * Returns a list of reviews associated with specified trail.
+   *
+   * @param cabqId searched for.
+   */
+
   @GetMapping(value = "search", params = "cabqId", produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Review> search(@RequestParam(value = "cabqId", required = true) Long cabqId) {
     return repository.findAllByCabqId(cabqId);
   }
 
+
   /**
    * Adds the provided {@link Review} resource to the database and returns the completed resource.
+   *
    * @param review {@link Review} resource.
    * @return {@link Review} resource.
    */
@@ -129,10 +133,11 @@ public class ReviewController {
     return ResponseEntity.created(review.getHref()).body(review);
   }
 
+
   /**
    * Adds the provided {@link Review} resource to the database and returns the completed resource.
+   *
    * @param id of review.
-   * @param review
    * @return {@link Review} resource.
    */
   @PutMapping(value = "{id}",
@@ -148,8 +153,10 @@ public class ReviewController {
     return existingReview;
   }
 
+
   /**
    * Deletes the specified {@link Review} resource from the database.
+   *
    * @param id of review {@link UUID}
    */
   @DeleteMapping(value = "{id}")
@@ -157,6 +164,7 @@ public class ReviewController {
   public void delete(@PathVariable("id") UUID id) {
     repository.delete(get(id));
   }
+
 
   /**
    * Maps (via annotation) a {@link NoSuchElementException} to a response status code of {@link
