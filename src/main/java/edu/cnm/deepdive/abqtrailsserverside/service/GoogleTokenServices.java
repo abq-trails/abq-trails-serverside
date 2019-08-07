@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.abqtrailsserverside;
+package edu.cnm.deepdive.abqtrailsserverside.service;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;

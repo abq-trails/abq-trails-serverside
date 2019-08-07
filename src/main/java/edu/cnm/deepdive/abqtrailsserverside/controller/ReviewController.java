@@ -1,6 +1,8 @@
 package edu.cnm.deepdive.abqtrailsserverside.controller;
 
 import edu.cnm.deepdive.abqtrailsserverside.model.dao.ReviewRepository;
+import edu.cnm.deepdive.abqtrailsserverside.model.dao.TrailRepository;
+import edu.cnm.deepdive.abqtrailsserverside.model.dao.UserRepository;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.Review;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.Trail;
 import edu.cnm.deepdive.abqtrailsserverside.model.entity.User;
@@ -25,13 +27,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @ExposesResourceFor(Review.class)
-@RequestMapping("ratings")
+@RequestMapping("reviews")
 public class ReviewController {
 
   private final ReviewRepository repository;
-  
-  public ReviewController(ReviewRepository repository) {
+  private final TrailRepository trailRepository;
+  private final UserRepository userRepository;
+
+  public ReviewController(ReviewRepository repository,
+      TrailRepository trailRepository,
+      UserRepository userRepository) {
     this.repository = repository;
+    this.trailRepository = trailRepository;
+    this.userRepository = userRepository;
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -58,6 +66,10 @@ public class ReviewController {
   @PostMapping(
       consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Review> post(@RequestBody Review review) {
+    Trail trail = trailRepository.findByCabqId(review.getTrail().getCabqId()).get();
+    User user = userRepository.getByUsername(review.getUser().getUsername()).get();
+    review.setTrail(trail);
+    review.setUser(user);
     repository.save(review);
     return ResponseEntity.created(review.getHref()).body(review);
   }
@@ -71,7 +83,7 @@ public class ReviewController {
     existingReview.setTrail(review.getTrail());
     existingReview.setUser(review.getUser());
     repository.save(existingReview);
-   //TODO Add in if statement to retrieve user etc. if necessary (see Movie Controller put).
+    //TODO Add in if statement to retrieve user etc. if necessary (see Movie Controller put).
     return existingReview;
   }
 

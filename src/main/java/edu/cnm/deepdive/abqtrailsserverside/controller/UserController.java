@@ -32,7 +32,7 @@ public class UserController {
     this.repository = repository;
   }
 
-  @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(value = "{id}",produces = MediaType.APPLICATION_JSON_VALUE)
   public User get(@PathVariable("id") UUID id) {
     return repository.findById(id).get();
   }

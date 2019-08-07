@@ -50,7 +50,7 @@ public class DataMapper {
     GeoJsonObject geometry = feature.getGeometry();
     Map properties = feature.getProperties();
     long cabqId = convertToLong(properties.get("id"));
-    if (repository.findByCabqId(cabqId) == null) {
+    if (!repository.findByCabqId(cabqId).isPresent()) {
       Trail trail = new Trail();
       trail.setCabqId(cabqId);
       if (properties.get("name") != null) {
@@ -77,7 +77,9 @@ public class DataMapper {
   }
 
   public static Long convertToLong(Object o) {
-    return new Long(o.toString());
+    String str = o.toString();
+    long id = Long.parseLong(str);
+    return id;
   }
   public static boolean convertToBool(Object o) {
     String status = o.toString();

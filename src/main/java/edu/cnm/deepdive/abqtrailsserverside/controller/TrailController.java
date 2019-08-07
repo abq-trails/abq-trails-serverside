@@ -42,8 +42,8 @@ public class TrailController {
   }
 
   @GetMapping(value = "search", params = "cabqId", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Trail get(@RequestParam(value = "cabqId", required = true) Long cabqId) {
-    return repository.findByCabqId(cabqId);
+  public Trail get(@RequestParam(value = "cabqId", required = true) long cabqId) {
+    return repository.findByCabqId(cabqId).get();
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
